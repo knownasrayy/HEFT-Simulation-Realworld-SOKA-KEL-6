@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Topcuoglu_2002_10_Task_DAG_4VM",
+    "description": "Struktur DAG 10-node/15-edge dari Topcuoglu et al. (2002), bobot komputasi disesuaikan dengan rasio kecepatan 4 VM heterogen (w_ij = base / speed_factor).",
+    "inter_host_comm_penalty": 1.5,
+    "intra_host_comm_factor": 1.0
+  },
+  "vms": [
+    {"id": "vm-worker-1", "host": "host-1", "cpu_limit": "1000m", "speed_factor": 1.0,  "url": "http://localhost:30081", "internal_url": "http://vm-worker-1-svc:8000"},
+    {"id": "vm-worker-2", "host": "host-1", "cpu_limit": "500m",  "speed_factor": 0.5,  "url": "http://localhost:30082", "internal_url": "http://vm-worker-2-svc:8000"},
+    {"id": "vm-worker-3", "host": "host-2", "cpu_limit": "750m",  "speed_factor": 0.75, "url": "http://localhost:30083", "internal_url": "http://vm-worker-3-svc:8000"},
+    {"id": "vm-worker-4", "host": "host-2", "cpu_limit": "250m",  "speed_factor": 0.25, "url": "http://localhost:30084", "internal_url": "http://vm-worker-4-svc:8000"}
+  ],
+  "tasks": [
+    {"id": "T1",  "base_seconds_on_p1": 1.2, "w": {"vm-worker-1": 1.2, "vm-worker-2": 2.4, "vm-worker-3": 1.60, "vm-worker-4": 4.8}},
+    {"id": "T2",  "base_seconds_on_p1": 1.0, "w": {"vm-worker-1": 1.0, "vm-worker-2": 2.0, "vm-worker-3": 1.33, "vm-worker-4": 4.0}},
+    {"id": "T3",  "base_seconds_on_p1": 0.8, "w": {"vm-worker-1": 0.8, "vm-worker-2": 1.6, "vm-worker-3": 1.07, "vm-worker-4": 3.2}},
+    {"id": "T4",  "base_seconds_on_p1": 0.9, "w": {"vm-worker-1": 0.9, "vm-worker-2": 1.8, "vm-worker-3": 1.20, "vm-worker-4": 3.6}},
+    {"id": "T5",  "base_seconds_on_p1": 0.7, "w": {"vm-worker-1": 0.7, "vm-worker-2": 1.4, "vm-worker-3": 0.93, "vm-worker-4": 2.8}},
+    {"id": "T6",  "base_seconds_on_p1": 1.1, "w": {"vm-worker-1": 1.1, "vm-worker-2": 2.2, "vm-worker-3": 1.47, "vm-worker-4": 4.4}},
+    {"id": "T7",  "base_seconds_on_p1": 0.6, "w": {"vm-worker-1": 0.6, "vm-worker-2": 1.2, "vm-worker-3": 0.80, "vm-worker-4": 2.4}},
+    {"id": "T8",  "base_seconds_on_p1": 0.9, "w": {"vm-worker-1": 0.9, "vm-worker-2": 1.8, "vm-worker-3": 1.20, "vm-worker-4": 3.6}},
+    {"id": "T9",  "base_seconds_on_p1": 1.3, "w": {"vm-worker-1": 1.3, "vm-worker-2": 2.6, "vm-worker-3": 1.73, "vm-worker-4": 5.2}},
+    {"id": "T10", "base_seconds_on_p1": 0.5, "w": {"vm-worker-1": 0.5, "vm-worker-2": 1.0, "vm-worker-3": 0.67, "vm-worker-4": 2.0}}
+  ],
+  "edges": [
+    {"from": "T1", "to": "T2",  "comm_cost": 0.9, "data_kb": 900},
+    {"from": "T1", "to": "T3",  "comm_cost": 0.6, "data_kb": 600},
+    {"from": "T1", "to": "T4",  "comm_cost": 0.5, "data_kb": 500},
+    {"from": "T1", "to": "T5",  "comm_cost": 0.7, "data_kb": 700},
+    {"from": "T1", "to": "T6",  "comm_cost": 0.8, "data_kb": 800},
+    {"from": "T2", "to": "T8",  "comm_cost": 0.9, "data_kb": 900},
+    {"from": "T2", "to": "T9",  "comm_cost": 0.8, "data_kb": 800},
+    {"from": "T3", "to": "T7",  "comm_cost": 1.1, "data_kb": 1100},
+    {"from": "T4", "to": "T8",  "comm_cost": 1.3, "data_kb": 1300},
+    {"from": "T4", "to": "T9",  "comm_cost": 1.1, "data_kb": 1100},
+    {"from": "T5", "to": "T9",  "comm_cost": 0.6, "data_kb": 600},
+    {"from": "T6", "to": "T8",  "comm_cost": 0.7, "data_kb": 700},
+    {"from": "T7", "to": "T10", "comm_cost": 0.8, "data_kb": 800},
+    {"from": "T8", "to": "T10", "comm_cost": 0.5, "data_kb": 500},
+    {"from": "T9", "to": "T10", "comm_cost": 0.6, "data_kb": 600}
+  ]
+}

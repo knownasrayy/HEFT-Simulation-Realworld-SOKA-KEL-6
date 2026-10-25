@@ -1,0 +1,222 @@
+# 4 VM heterogen (Pod) + 4 NodePort Service.
+# Heterogenitas dibuat melalui CFS quota (resources.limits.cpu).
+# NODE_NAME diambil dari Downward API sebagai bukti penempatan fisik Pod.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vm-worker-1
+  labels:
+    app: heft-worker
+    vm-id: vm-worker-1
+    host-id: host-1
+spec:
+  nodeSelector:
+    topology.host: host-1
+  containers:
+    - name: worker
+      image: heft-worker:latest
+      imagePullPolicy: Never
+      env:
+        - name: VM_ID
+          value: "vm-worker-1"
+        - name: HOST_ID
+          value: "host-1"
+        - name: CPU_LIMIT
+          value: "1000m"
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+      ports:
+        - containerPort: 8000
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8000
+        initialDelaySeconds: 2
+        periodSeconds: 3
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "128Mi"
+        limits:
+          cpu: "1000m"
+          memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vm-worker-1-svc
+spec:
+  type: NodePort
+  selector:
+    vm-id: vm-worker-1
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30081
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vm-worker-2
+  labels:
+    app: heft-worker
+    vm-id: vm-worker-2
+    host-id: host-1
+spec:
+  nodeSelector:
+    topology.host: host-1
+  containers:
+    - name: worker
+      image: heft-worker:latest
+      imagePullPolicy: Never
+      env:
+        - name: VM_ID
+          value: "vm-worker-2"
+        - name: HOST_ID
+          value: "host-1"
+        - name: CPU_LIMIT
+          value: "500m"
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+      ports:
+        - containerPort: 8000
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8000
+        initialDelaySeconds: 2
+        periodSeconds: 3
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "128Mi"
+        limits:
+          cpu: "500m"
+          memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vm-worker-2-svc
+spec:
+  type: NodePort
+  selector:
+    vm-id: vm-worker-2
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30082
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vm-worker-3
+  labels:
+    app: heft-worker
+    vm-id: vm-worker-3
+    host-id: host-2
+spec:
+  nodeSelector:
+    topology.host: host-2
+  containers:
+    - name: worker
+      image: heft-worker:latest
+      imagePullPolicy: Never
+      env:
+        - name: VM_ID
+          value: "vm-worker-3"
+        - name: HOST_ID
+          value: "host-2"
+        - name: CPU_LIMIT
+          value: "750m"
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+      ports:
+        - containerPort: 8000
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8000
+        initialDelaySeconds: 2
+        periodSeconds: 3
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "128Mi"
+        limits:
+          cpu: "750m"
+          memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vm-worker-3-svc
+spec:
+  type: NodePort
+  selector:
+    vm-id: vm-worker-3
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30083
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vm-worker-4
+  labels:
+    app: heft-worker
+    vm-id: vm-worker-4
+    host-id: host-2
+spec:
+  nodeSelector:
+    topology.host: host-2
+  containers:
+    - name: worker
+      image: heft-worker:latest
+      imagePullPolicy: Never
+      env:
+        - name: VM_ID
+          value: "vm-worker-4"
+        - name: HOST_ID
+          value: "host-2"
+        - name: CPU_LIMIT
+          value: "250m"
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+      ports:
+        - containerPort: 8000
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8000
+        initialDelaySeconds: 2
+        periodSeconds: 3
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "250m"
+          memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vm-worker-4-svc
+spec:
+  type: NodePort
+  selector:
+    vm-id: vm-worker-4
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30084
