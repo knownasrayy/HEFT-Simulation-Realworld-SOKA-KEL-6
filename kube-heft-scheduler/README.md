@@ -1,61 +1,135 @@
-# KubeHEFT — Real-World Heterogeneous Cloud Task Scheduler
+# KubeHEFT: Real-World Heuristic Task Scheduler pada Klaster Cloud Heterogen
 
-Implementasi nyata algoritma **HEFT** (Topcuoglu, Hariri & Wu, IEEE TPDS 2002) pada klaster
-Kubernetes (Kind) heterogen: **1 Datacenter, 2 Host, 4 VM**, dibandingkan dengan baseline
-**Topological Round-Robin**.
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-Kind%20v1.32.2-blue?logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+[![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-green?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 
-| Komponen | Implementasi |
-| :--- | :--- |
-| Datacenter | Kind cluster `heft-datacenter` |
-| Host 1 / Host 2 | Worker node `heft-datacenter-worker` (`topology.host=host-1`) / `heft-datacenter-worker2` (`host-2`) |
-| VM 1–4 | Pod `vm-worker-1..4` dengan `limits.cpu` 1000m / 500m / 750m / 250m |
-| Master | Python (Windows/WSL) — HEFT engine, RR baseline, async dispatcher |
+> **Tugas Besar:** Strategi Optimasi Komputasi Awan (SOKA) — Semester 5 (Kelompok 6)  
+> **Algoritma Inti:** Heterogeneous Earliest Finish Time (HEFT) — Topcuoglu et al. (IEEE TPDS 2002)  
+> **Infrastruktur Target:** 1 Datacenter (Kind Cluster), 2 Host (Worker Nodes), 4 VM (Heterogeneous Pods)
 
-## Struktur
+---
 
-```text
-kube-heft-scheduler/
-├── infra/      kind-config.yaml, k8s-workers.yaml, setup/teardown (.sh & .ps1)
-├── worker/     FastAPI worker: /health, /calibrate, /execute, /transfer, /receive
-├── master/     dag_sample.json, heft_algorithm.py, baseline_scheduler.py,
-│               dispatcher.py, visualize.py, run_experiment.py
-└── results/    gantt_comparison.png, makespan_runs.png, execution_log.json, evaluation_report.md
-```
+## 📌 Ringkasan Hasil Pengujian (5 Runs di Kubernetes)
 
-## Cara Menjalankan
+| Metrik Evaluasi | HEFT (Teoritis) | HEFT (Aktual Cloud, mean ± std) | Round-Robin (Aktual Cloud, mean ± std) | Peningkatan / Reduksi |
+| :--- | :---: | :---: | :---: | :---: |
+| **Makespan ($C_{\max}$)** | `6.900` s | **`7.367 ± 0.314` s** | `13.437 ± 0.529` s | **45.18% Lebih Cepat** |
+| **Schedule Length Ratio (SLR)** | `1.725` | **`1.842 ± 0.079`** | `3.359 ± 0.132` | **Efisien Mendekati CP** |
+| **Speedup** | `1.304x` | **`1.224 ± 0.054x`** | `0.671 ± 0.026x` | **Parallel Speedup Nyata** |
 
-**Prasyarat:** Docker Desktop, `kind`, `kubectl`, Python 3.11+.
+**Konsistensi:** HEFT menghasilkan makespan lebih cepat pada **5 dari 5 kali pengujian (100% win rate)**.
+
+---
+
+## 📊 Visualisasi Hasil
+
+### 1. Gantt Chart 3 Panel (Teori vs Real Cloud HEFT vs Real Cloud Round-Robin)
+![Gantt Comparison](results/gantt_comparison.png)
+
+### 2. Grafik Makespan Per Run (5 Pengujian)
+![Makespan Runs](results/makespan_runs.png)
+
+---
+
+## 🏛️ Infrastruktur Klaster Cloud
+
+### 1. Pemetaan Arsitektur
+- **Datacenter:** 1 Klaster Kind (`heft-datacenter`) menggunakan Docker bridge network terisolasi.
+- **Host 1:** Worker Node 1 (`heft-datacenter-worker`) berlabel `topology.host=host-1`.
+- **Host 2:** Worker Node 2 (`heft-datacenter-worker2`) berlabel `topology.host=host-2`.
+- **VM 1 s.d. VM 4:** Pod heterogen dibatasi oleh cgroups CFS Quota kernel Linux:
+  - `vm-worker-1` (Host 1): `1000m` CPU (1.0 Core), 512 MiB RAM — Kecepatan: **1.00x** (Port 30081)
+  - `vm-worker-2` (Host 1): `500m` CPU (0.5 Core), 256 MiB RAM — Kecepatan: **0.50x** (Port 30082)
+  - `vm-worker-3` (Host 2): `750m` CPU (0.75 Core), 512 MiB RAM — Kecepatan: **0.75x** (Port 30083)
+  - `vm-worker-4` (Host 2): `250m` CPU (0.25 Core), 256 MiB RAM — Kecepatan: **0.25x** (Port 30084)
+
+### 2. Verifikasi Empiris Heterogenitas Hardware (Kalibrasi SHA-256)
+- `vm-worker-1`: `1,879,404` iterasi/detik (**`1.000x`**)
+- `vm-worker-2`: `1,074,174` iterasi/detik (**`0.572x`**)
+- `vm-worker-3`: `1,780,466` iterasi/detik (**`0.947x`**)
+- `vm-worker-4`: `480,020` iterasi/detik (**`0.255x`**)
+
+### 3. Model Biaya Komunikasi Jaringan Sadar Topologi
+- **Intra-VM ($p_a = p_b$):** Biaya = `0.0 detik`
+- **Intra-Host ($p_a \neq p_b$, Host sama):** Biaya = $1.0 \times c_{\text{base}}$
+- **Inter-Host (Host beda):** Biaya = $1.5 \times c_{\text{base}}$ (penalti latensi lintas-host)
+- **Transfer Riil (FR-02):** Worker mengirim payload data HTTP ke `/receive` milik Pod tujuan via DNS Service internal (`http://vm-worker-X-svc:8000`).
+
+---
+
+## 🚀 Panduan Menjalankan
+
+### Prasyarat
+- Docker Desktop aktif (minimal 4 CPU, 4 GB RAM)
+- `kind` dan `kubectl` terpasang
+- Python 3.11+
 
 ### Windows (PowerShell)
 ```powershell
-cd kube-heft-scheduler
+# 1. Bangun Docker image dan buat klaster Kind
 powershell -ExecutionPolicy Bypass -File .\infra\setup_cluster.ps1
+
+# 2. Setup virtual environment Python
 py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m master.run_experiment --runs 5
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+# 3. Jalankan pengujian 5 runs
+python -m master.run_experiment --runs 5
 ```
 
-### Linux / WSL2
+### Linux / WSL2 (Bash)
 ```bash
-cd kube-heft-scheduler
-chmod +x infra/*.sh && ./infra/setup_cluster.sh
-python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
+# 1. Setup klaster Kind
+chmod +x infra/*.sh
+./infra/setup_cluster.sh
+
+# 2. Setup virtual environment Python
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+# 3. Jalankan pengujian
 python3 -m master.run_experiment --runs 5
 ```
 
-Hanya menghitung jadwal teoritis (tanpa klaster): `python -m master.heft_algorithm`
+### Opsi Perintah Tambahan
+- Hanya kalkulasi matematis HEFT (tanpa klaster):  
+  `python -m master.heft_algorithm`
+- Hapus klaster Kind:  
+  - Windows: `powershell -ExecutionPolicy Bypass -File .\infra\teardown_cluster.ps1`  
+  - Linux: `./infra/teardown_cluster.sh`
 
-Membersihkan klaster: `./infra/teardown_cluster.sh` atau `.\infra\teardown_cluster.ps1`
+---
 
-## Catatan Desain (penyempurnaan dari PRD)
+## 📁 Struktur Berkas
 
-1. **Transfer data antar-VM riil (FR-02):** saat tugas induk selesai, VM sumber mengirim payload
-   (`data_kb`) via HTTP ke VM tujuan melalui DNS Service internal klaster (`vm-worker-X-svc:8000`).
-   Latensi topologi diinjeksi sehingga total komunikasi = `max(transfer_riil, biaya_model)`
-   (intra-host 1.0x, inter-host 1.5x).
-2. **Rata-rata biaya komunikasi `c̄`** dihitung atas pasangan VM *berbeda* (sesuai paper).
-3. **Kalibrasi seluruh 4 VM** untuk membuktikan heterogenitas CFS quota secara empiris.
-4. **Pengujian berulang** (`--runs N`, urutan HEFT/RR diselang-seling) dengan mean ± std.
-5. **Bukti topologi** (`kubectl get nodes/pods -o wide`) otomatis masuk ke laporan.
-6. Bobot DAG: struktur 10-node/15-edge dari paper, biaya komputasi disesuaikan dengan rasio
-   kecepatan VM (`w_ij = base / speed_factor`).
+```text
+kube-heft-scheduler/
+├── PRD.md                        # Blueprint PRD v2.0
+├── README.md                     # Panduan penggunaan ini
+├── requirements.txt              # Dependensi master (httpx, matplotlib, numpy, pydantic)
+├── infra/
+│   ├── kind-config.yaml          # Konfigurasi 1 Cluster, 2 Worker Node, port mapping 30081-30084
+│   ├── k8s-workers.yaml          # Manifest 4 Pod Heterogen + 4 NodePort Services
+│   ├── setup_cluster.ps1 / .sh   # Script otomasi build image & provisioning klaster
+│   └── teardown_cluster.ps1 / .sh# Script pembersihan klaster
+├── worker/
+│   ├── Dockerfile                # Container image python:3.11-slim
+│   ├── requirements.txt          # fastapi, uvicorn, pydantic, httpx
+│   └── main.py                   # Worker REST API (/health, /calibrate, /execute, /transfer, /receive)
+├── master/
+│   ├── __init__.py
+│   ├── dag_sample.json           # Graf 10-node DAG (Topcuoglu 2002)
+│   ├── heft_algorithm.py         # Upward Rank ($rank_u$) & Insertion-based EFT
+│   ├── baseline_scheduler.py     # Topological Round-Robin scheduler
+│   ├── dispatcher.py             # Async HTTP client & real data transfer
+│   ├── visualize.py              # Generator Gantt Chart & laporan Markdown
+│   └── run_experiment.py         # Entrypoint utama runner pengujian
+└── results/
+    ├── evaluation_report.md      # Laporan metrik komparasi lengkap
+    ├── execution_log.json        # Log mentah data eksekusi riil 5 runs
+    ├── gantt_comparison.png      # Gambar Gantt Chart 3 panel
+    └── makespan_runs.png         # Bar chart makespan tiap run
+```
