@@ -6,16 +6,16 @@
 
 ```text
 kubectl get nodes -L topology.host
-NAME                            STATUS   ROLES           AGE     VERSION   TOPOLOGY.HOST
-heft-datacenter-control-plane   Ready    control-plane   2m28s   v1.32.2   
-heft-datacenter-worker          Ready    <none>          2m17s   v1.32.2   host-1
-heft-datacenter-worker2         Ready    <none>          2m18s   v1.32.2   host-2
+NAME                            STATUS   ROLES           AGE    VERSION   TOPOLOGY.HOST
+heft-datacenter-control-plane   Ready    control-plane   2m7s   v1.32.2   
+heft-datacenter-worker          Ready    <none>          114s   v1.32.2   host-1
+heft-datacenter-worker2         Ready    <none>          114s   v1.32.2   host-2
 kubectl get pods -o wide
 NAME          READY   STATUS    RESTARTS   AGE    IP           NODE                      NOMINATED NODE   READINESS GATES
-vm-worker-1   1/1     Running   0          2m7s   10.244.2.3   heft-datacenter-worker    <none>           <none>
-vm-worker-2   1/1     Running   0          2m7s   10.244.2.2   heft-datacenter-worker    <none>           <none>
-vm-worker-3   1/1     Running   0          2m7s   10.244.1.2   heft-datacenter-worker2   <none>           <none>
-vm-worker-4   1/1     Running   0          2m7s   10.244.1.3   heft-datacenter-worker2   <none>           <none>
+vm-worker-1   1/1     Running   0          104s   10.244.2.2   heft-datacenter-worker    <none>           <none>
+vm-worker-2   1/1     Running   0          104s   10.244.2.3   heft-datacenter-worker    <none>           <none>
+vm-worker-3   1/1     Running   0          104s   10.244.1.2   heft-datacenter-worker2   <none>           <none>
+vm-worker-4   1/1     Running   0          104s   10.244.1.3   heft-datacenter-worker2   <none>           <none>
 ```
 
 | VM ID | Host (label) | Kind Node | Limit CPU | Status |
@@ -29,10 +29,10 @@ vm-worker-4   1/1     Running   0          2m7s   10.244.1.3   heft-datacenter-w
 
 | VM ID | Limit CPU | Rasio Target | Iterasi SHA-256/detik | Rasio Terukur |
 | :--- | :---: | :---: | ---: | :---: |
-| `vm-worker-1` | `1000m` | 1.00x | 1,879,404 | **1.000x** |
-| `vm-worker-2` | `500m` | 0.50x | 1,074,174 | **0.572x** |
-| `vm-worker-3` | `750m` | 0.75x | 1,780,466 | **0.947x** |
-| `vm-worker-4` | `250m` | 0.25x | 480,020 | **0.255x** |
+| `vm-worker-1` | `1000m` | 1.00x | 2,764,185 | **1.000x** |
+| `vm-worker-2` | `500m` | 0.50x | 2,049,077 | **0.741x** |
+| `vm-worker-3` | `750m` | 0.75x | 1,965,960 | **0.711x** |
+| `vm-worker-4` | `250m` | 0.25x | 874,619 | **0.316x** |
 
 ## 3. Fase 1 HEFT — Upward Rank & Fase 2 — Pemilihan VM (EFT + Insertion)
 
@@ -42,16 +42,16 @@ vm-worker-4   1/1     Running   0          2m7s   10.244.1.3   heft-datacenter-w
 
 | Task | $\overline{w_i}$ | $rank_u$ | VM HEFT | EST teori | EFT teori | AST aktual | AFT aktual |
 | :--- | :---: | :---: | :--- | :---: | :---: | :---: | :---: |
-| **T1** | 2.500 | 11.399 | `vm-worker-1` | 0.00 | 1.20 | 0.00 | 1.50 |
-| **T4** | 1.875 | 7.892 | `vm-worker-1` | 1.20 | 2.10 | 1.50 | 2.69 |
-| **T2** | 2.083 | 7.699 | `vm-worker-1` | 2.10 | 3.10 | 2.69 | 3.71 |
-| **T6** | 2.292 | 6.810 | `vm-worker-3` | 2.40 | 3.87 | 3.00 | 4.74 |
-| **T5** | 1.458 | 6.808 | `vm-worker-2` | 1.90 | 3.30 | 2.23 | 3.89 |
-| **T3** | 1.667 | 6.493 | `vm-worker-1` | 3.10 | 3.90 | 3.71 | 4.53 |
-| **T9** | 2.708 | 4.550 | `vm-worker-1` | 3.90 | 5.20 | 4.53 | 5.86 |
-| **T8** | 1.875 | 3.584 | `vm-worker-3` | 4.45 | 5.65 | 5.09 | 6.32 |
-| **T7** | 1.250 | 3.359 | `vm-worker-1` | 5.20 | 5.80 | 5.86 | 6.49 |
-| **T10** | 1.042 | 1.042 | `vm-worker-1` | 6.40 | 6.90 | 7.08 | 7.42 |
+| **T1** | 2.500 | 11.399 | `vm-worker-1` | 0.00 | 1.20 | 0.00 | 1.54 |
+| **T4** | 1.875 | 7.892 | `vm-worker-1` | 1.20 | 2.10 | 1.54 | 2.68 |
+| **T2** | 2.083 | 7.699 | `vm-worker-1` | 2.10 | 3.10 | 2.68 | 3.42 |
+| **T6** | 2.292 | 6.810 | `vm-worker-3` | 2.40 | 3.87 | 3.02 | 4.67 |
+| **T5** | 1.458 | 6.808 | `vm-worker-2` | 1.90 | 3.30 | 2.26 | 3.58 |
+| **T3** | 1.667 | 6.493 | `vm-worker-1` | 3.10 | 3.90 | 3.42 | 4.14 |
+| **T9** | 2.708 | 4.550 | `vm-worker-1` | 3.90 | 5.20 | 4.21 | 5.57 |
+| **T8** | 1.875 | 3.584 | `vm-worker-3` | 4.45 | 5.65 | 4.80 | 5.96 |
+| **T7** | 1.250 | 3.359 | `vm-worker-1` | 5.20 | 5.80 | 5.57 | 6.13 |
+| **T10** | 1.042 | 1.042 | `vm-worker-1` | 6.40 | 6.90 | 6.72 | 7.09 |
 
 **Tabel EFT kandidat per VM (dasar pemilihan VM):**
 
@@ -87,33 +87,33 @@ vm-worker-4   1/1     Running   0          2m7s   10.244.1.3   heft-datacenter-w
 
 | Skema | Edge | Sumber → Tujuan | Link | Payload | Transfer riil (s) | Biaya model (s) |
 | :--- | :--- | :--- | :--- | ---: | :---: | :---: |
-| HEFT | T1->T5 | `vm-worker-1` → `vm-worker-2` | intra-host | 700 KB | 0.0129 | 0.70 |
-| HEFT | T1->T6 | `vm-worker-1` → `vm-worker-3` | inter-host | 800 KB | 0.0658 | 1.20 |
-| HEFT | T4->T8 | `vm-worker-1` → `vm-worker-3` | inter-host | 1300 KB | 0.1106 | 1.95 |
-| HEFT | T2->T8 | `vm-worker-1` → `vm-worker-3` | inter-host | 900 KB | 0.1099 | 1.35 |
-| HEFT | T5->T9 | `vm-worker-2` → `vm-worker-1` | intra-host | 600 KB | 0.0367 | 0.60 |
-| HEFT | T8->T10 | `vm-worker-3` → `vm-worker-1` | inter-host | 500 KB | 0.0458 | 0.75 |
-| RR | T1->T2 | `vm-worker-1` → `vm-worker-2` | intra-host | 900 KB | 0.0071 | 0.90 |
-| RR | T1->T3 | `vm-worker-1` → `vm-worker-3` | inter-host | 600 KB | 0.1936 | 0.90 |
-| RR | T1->T4 | `vm-worker-1` → `vm-worker-4` | inter-host | 500 KB | 0.2169 | 0.75 |
-| RR | T1->T6 | `vm-worker-1` → `vm-worker-2` | intra-host | 800 KB | 0.2018 | 0.80 |
-| RR | T2->T8 | `vm-worker-2` → `vm-worker-4` | inter-host | 900 KB | 0.5016 | 1.35 |
-| RR | T2->T9 | `vm-worker-2` → `vm-worker-1` | intra-host | 800 KB | 0.4021 | 0.80 |
-| RR | T7->T10 | `vm-worker-3` → `vm-worker-2` | inter-host | 800 KB | 0.0990 | 1.20 |
-| RR | T4->T9 | `vm-worker-4` → `vm-worker-1` | inter-host | 1100 KB | 0.0757 | 1.65 |
-| RR | T6->T8 | `vm-worker-2` → `vm-worker-4` | inter-host | 700 KB | 0.0194 | 1.05 |
-| RR | T9->T10 | `vm-worker-1` → `vm-worker-2` | intra-host | 600 KB | 0.0086 | 0.60 |
-| RR | T8->T10 | `vm-worker-4` → `vm-worker-2` | inter-host | 500 KB | 0.0890 | 0.75 |
+| HEFT | T1->T5 | `vm-worker-1` → `vm-worker-2` | intra-host | 700 KB | 0.0345 | 0.70 |
+| HEFT | T1->T6 | `vm-worker-1` → `vm-worker-3` | inter-host | 800 KB | 0.0842 | 1.20 |
+| HEFT | T4->T8 | `vm-worker-1` → `vm-worker-3` | inter-host | 1300 KB | 0.1058 | 1.95 |
+| HEFT | T2->T8 | `vm-worker-1` → `vm-worker-3` | inter-host | 900 KB | 0.1293 | 1.35 |
+| HEFT | T5->T9 | `vm-worker-2` → `vm-worker-1` | intra-host | 600 KB | 0.0562 | 0.60 |
+| HEFT | T8->T10 | `vm-worker-3` → `vm-worker-1` | inter-host | 500 KB | 0.0758 | 0.75 |
+| RR | T1->T2 | `vm-worker-1` → `vm-worker-2` | intra-host | 900 KB | 0.0160 | 0.90 |
+| RR | T1->T3 | `vm-worker-1` → `vm-worker-3` | inter-host | 600 KB | 0.1808 | 0.90 |
+| RR | T1->T4 | `vm-worker-1` → `vm-worker-4` | inter-host | 500 KB | 0.1680 | 0.75 |
+| RR | T1->T6 | `vm-worker-1` → `vm-worker-2` | intra-host | 800 KB | 0.2095 | 0.80 |
+| RR | T2->T8 | `vm-worker-2` → `vm-worker-4` | inter-host | 900 KB | 0.4089 | 1.35 |
+| RR | T2->T9 | `vm-worker-2` → `vm-worker-1` | intra-host | 800 KB | 0.3875 | 0.80 |
+| RR | T7->T10 | `vm-worker-3` → `vm-worker-2` | inter-host | 800 KB | 0.0792 | 1.20 |
+| RR | T4->T9 | `vm-worker-4` → `vm-worker-1` | inter-host | 1100 KB | 0.1891 | 1.65 |
+| RR | T6->T8 | `vm-worker-2` → `vm-worker-4` | inter-host | 700 KB | 0.0199 | 1.05 |
+| RR | T9->T10 | `vm-worker-1` → `vm-worker-2` | intra-host | 600 KB | 0.0082 | 0.60 |
+| RR | T8->T10 | `vm-worker-4` → `vm-worker-2` | inter-host | 500 KB | 0.0842 | 0.75 |
 
 ## 6. Hasil Pengujian Berulang (5 run)
 
 | Run | Makespan HEFT (s) | Makespan RR (s) | Reduksi |
 | :---: | :---: | :---: | :---: |
-| 1 | 6.878 | 13.945 | 50.68% |
-| 2 | 7.270 | 14.073 | 48.34% |
-| 3 ⭐ | 7.424 | 13.111 | 43.38% |
-| 4 | 7.673 | 12.934 | 40.68% |
-| 5 | 7.590 | 13.122 | 42.16% |
+| 1 ⭐ | 7.087 | 14.179 | 50.02% |
+| 2 | 7.385 | 17.004 | 56.57% |
+| 3 | 6.529 | 14.774 | 55.81% |
+| 4 | 6.901 | 14.959 | 53.86% |
+| 5 | 7.571 | 15.535 | 51.27% |
 
 ⭐ = run representatif (median HEFT) yang digambar pada Gantt Chart.
 
@@ -123,13 +123,13 @@ vm-worker-4   1/1     Running   0          2m7s   10.244.1.3   heft-datacenter-w
 | :--- | :---: | :---: | :---: |
 | HEFT (Teoritis) | 6.900 | 1.725 | 1.304x |
 | Round-Robin (Teoritis) | 12.700 | 3.175 | 0.709x |
-| **HEFT (Aktual Kubernetes, mean ± std)** | **7.367 ± 0.314** | **1.842 ± 0.079** | **1.224 ± 0.054** |
-| Round-Robin (Aktual Kubernetes, mean ± std) | 13.437 ± 0.529 | 3.359 ± 0.132 | 0.671 ± 0.026 |
+| **HEFT (Aktual Kubernetes, mean ± std)** | **7.094 ± 0.409** | **1.774 ± 0.102** | **1.272 ± 0.074** |
+| Round-Robin (Aktual Kubernetes, mean ± std) | 15.290 ± 1.073 | 3.823 ± 0.268 | 0.591 ± 0.040 |
 
 * $SLR = C_{max} / \sum_{n_i \in CP_{MIN}} \min_{p_j} w_{i,j}$, dengan $CP_{MIN}$ = 4.00 s
 * $Speedup = \min_{p_j} \sum_{n_i} w_{i,j} / C_{max}$, dengan waktu sekuensial minimum = 9.00 s
 
-> **Kesimpulan:** HEFT menghasilkan makespan lebih rendah daripada Round-Robin pada **5/5** run, dengan reduksi makespan rata-rata **45.18%** pada klaster Kubernetes heterogen nyata (1 Datacenter, 2 Host, 4 VM).
+> **Kesimpulan:** HEFT menghasilkan makespan lebih rendah daripada Round-Robin pada **5/5** run, dengan reduksi makespan rata-rata **53.60%** pada klaster Kubernetes heterogen nyata (1 Datacenter, 2 Host, 4 VM).
 
 ## 8. Artefak
 

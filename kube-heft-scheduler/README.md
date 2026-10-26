@@ -65,41 +65,75 @@
 - `kind` dan `kubectl` terpasang
 - Python 3.11+
 
-### Windows (PowerShell)
+### 1. Setup Klaster Cloud (Kind)
+- **Windows (PowerShell):**
+  ```powershell
+  powershell -ExecutionPolicy Bypass -File .\infra\setup_cluster.ps1
+  ```
+- **Linux / WSL2 (Bash):**
+  ```bash
+  chmod +x infra/*.sh
+  ./infra/setup_cluster.sh
+  ```
+
+*Verifikasi topologi Pod dan Node:*
 ```powershell
-# 1. Bangun Docker image dan buat klaster Kind
-powershell -ExecutionPolicy Bypass -File .\infra\setup_cluster.ps1
-
-# 2. Setup virtual environment Python
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-
-# 3. Jalankan pengujian 5 runs
-python -m master.run_experiment --runs 5
+kubectl --context kind-heft-datacenter get nodes -L topology.host
+kubectl --context kind-heft-datacenter get pods -o wide
 ```
 
-### Linux / WSL2 (Bash)
-```bash
-# 1. Setup klaster Kind
-chmod +x infra/*.sh
-./infra/setup_cluster.sh
+### 2. Setup Virtual Environment Python
+- **Windows:**
+  ```powershell
+  py -3.12 -m venv .venv
+  .\.venv\Scripts\Activate.ps1
+  pip install -r requirements.txt
+  ```
+- **Linux / WSL2:**
+  ```bash
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt
+  ```
 
-# 2. Setup virtual environment Python
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+### 3. Eksekusi Eksperimen Benchmark
+Pilih mode eksekusi yang diinginkan:
 
-# 3. Jalankan pengujian
-python3 -m master.run_experiment --runs 5
-```
+- **Mode Pengujian Penuh (Rekomendasi - 5 Runs):**
+  ```powershell
+  python -m master.run_experiment --runs 5
+  ```
+- **Mode Demo Cepat (1 Run Saja - Durasi ~20 Detik):**
+  ```powershell
+  python -m master.run_experiment --runs 1
+  ```
+- **Mode Kalkulasi Matematis Saja (Tanpa Klaster):**
+  ```powershell
+  python -m master.heft_algorithm
+  ```
 
-### Opsi Perintah Tambahan
-- Hanya kalkulasi matematis HEFT (tanpa klaster):  
-  `python -m master.heft_algorithm`
-- Hapus klaster Kind:  
-  - Windows: `powershell -ExecutionPolicy Bypass -File .\infra\teardown_cluster.ps1`  
-  - Linux: `./infra/teardown_cluster.sh`
+*Opsi Tambahan:* `--runs <int>` (jumlah run), `--cooldown <float>` (jeda detik antar-run), `--context <str>` (konteks kubectl).
+
+---
+
+## 🧹 Panduan Pembersihan Total Klaster (Teardown & Cleanup)
+
+Setelah selesai melakukan pengujian atau demo, lakukan pembersihan untuk membebaskan RAM dan CPU:
+
+1. **Hapus Klaster Kind:**
+   - **Windows:** `powershell -ExecutionPolicy Bypass -File .\infra\teardown_cluster.ps1` (atau `kind delete cluster --name heft-datacenter`)
+   - **Linux:** `./infra/teardown_cluster.sh`
+2. **Verifikasi Container & Port Bersih:**
+   - `docker ps` (pastikan tidak ada container `heft-datacenter-*`)
+   - `netstat -ano | findstr "30081 30082 30083 30084"` (pastikan port sudah bebas)
+3. **Nonaktifkan Environment Python:**
+   - Jalankan `deactivate` pada terminal.
+4. **(Opsional) Hapus Docker Image:**
+   - Jalankan `docker rmi heft-worker:latest` untuk menghemat ruang disk SSD.
+5. **(Opsional) Tutup Docker Desktop:**
+   - Klik kanan ikon Docker Desktop di tray $\to$ **Quit Docker Desktop**.
+
+> 🛡️ **Catatan:** Seluruh file laporan dan grafik di folder `results/` tetap aman tersimpan. Menghapus klaster tidak akan menghapus data hasil eksperimen.
 
 ---
 

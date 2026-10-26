@@ -351,46 +351,125 @@ pip install -r requirements.txt
 
 ### Langkah 4: Eksekusi Eksperimen Benchmark
 
-Jalankan eksperimen evaluasi (default: 5 runs pengujian):
-```bash
+Kamu dapat memilih mode eksekusi sesuai kebutuhan (demo cepat atau pengujian statistik penuh):
+
+#### A. Mode Pengujian Penuh (Rekomendasi: 5 Runs)
+Menjalankan 5 kali pengujian berulang dengan urutan HEFT dan Round-Robin yang diselang-seling (menghasilkan rata-rata $\pm$ standar deviasi):
+```powershell
 python -m master.run_experiment --runs 5
 ```
 
-**Opsi Perintah yang Tersedia:**
-- `--runs <N>`: Jumlah perulangan pengujian (default: `5`).
-- `--cooldown <detik>`: Waktu jeda antar-pengujian untuk stabilisasi CPU (default: `1.0`).
-- `--context <nama_context>`: Nama context Kubernetes kubectl (default: `kind-heft-datacenter`).
+#### B. Mode Demo Cepat (1 Run Saja — Durasi ~20 Detik)
+Sangat cocok untuk demonstrasi langsung saat presentasi di hadapan dosen:
+```powershell
+python -m master.run_experiment --runs 1
+```
 
-*Jika hanya ingin menguji kalkulasi matematis HEFT tanpa klaster:*
-```bash
+#### C. Mode Uji Algoritma Matematis (Tanpa Klaster)
+Jika ingin melihat hasil kalkulasi matematis $rank_u$, tabel EFT kandidat, dan jadwal teoritis tanpa memerlukan Docker/Kubernetes:
+```powershell
 python -m master.heft_algorithm
 ```
 
+**Daftar Parameter CLI (`run_experiment.py`):**
+| Flag Parameter | Tipe Data | Nilai Default | Penjelasan |
+| :--- | :---: | :---: | :--- |
+| `--runs` | `int` | `5` | Jumlah repetisi eksekusi HEFT dan Round-Robin. |
+| `--cooldown` | `float` | `1.0` | Waktu jeda (detik) antar-eksekusi untuk stabilisasi CPU dan pendinginan hardware. |
+| `--context` | `str` | `kind-heft-datacenter` | Nama konteks Kubernetes kubectl yang dituju. |
+
+**Contoh Output Terminal Saat Eksperimen Berjalan:**
+```text
+[1/6] Menghitung jadwal teoritis HEFT dan Round-Robin...
+      -> Urutan Prioritas HEFT : T1 -> T4 -> T2 -> T6 -> T5 -> T3 -> T9 -> T8 -> T7 -> T10
+      -> Makespan Teoritis HEFT: 6.90s
+      -> Makespan Teoritis RR  : 12.70s
+[2/6] Memverifikasi topologi klaster (kubectl)...
+[3/6] Health-check & kalibrasi CPU keempat VM...
+      -> vm-worker-1 (1000m):    1,879,404 it/s | rasio 1.000x
+      -> vm-worker-2 ( 500m):    1,074,174 it/s | rasio 0.572x
+      -> vm-worker-3 ( 750m):    1,780,466 it/s | rasio 0.947x
+      -> vm-worker-4 ( 250m):      480,020 it/s | rasio 0.255x
+[4/6] Mengeksekusi 5 run HEFT & Round-Robin secara riil di Kubernetes...
+      Run 1: HEFT = 6.878s | RR = 13.945s
+      Run 2: HEFT = 7.270s | RR = 14.073s
+      Run 3: HEFT = 7.424s | RR = 13.111s
+      Run 4: HEFT = 7.673s | RR = 12.934s
+      Run 5: HEFT = 7.590s | RR = 13.122s
+[5/6] Menyimpan log eksekusi...
+[6/6] Membuat Gantt Chart & laporan evaluasi...
+
+HEFT mean = 7.367s | RR mean = 13.437s
+Selesai! Cek results/gantt_comparison.png, results/makespan_runs.png, results/evaluation_report.md
+```
+
 ---
 
-### Langkah 5: Membaca Hasil & Laporan
+### Langkah 5: Membaca & Memverifikasi Hasil
 
 Setelah eksperimen selesai, seluruh artefak tersimpan otomatis pada folder `results/`:
-- `results/gantt_comparison.png`: Grafik visual Gantt Chart 3 panel.
-- `results/makespan_runs.png`: Grafik batang perbandingan makespan tiap run.
-- `results/evaluation_report.md`: Laporan komprehensif dalam format Markdown siap pakai.
-- `results/execution_log.json`: Data mentah JSON hasil pembacaan metrik dan transfer payload.
+1. `results/gantt_comparison.png`: Grafik visual Gantt Chart 3 panel (Teori HEFT, Aktual HEFT, Aktual Round-Robin) yang menunjukkan alokasi tugas per VM dan garis transfer data riil.
+2. `results/makespan_runs.png`: Grafik batang perbandingan makespan tiap run pengujian.
+3. `results/evaluation_report.md`: Laporan komprehensif dalam format Markdown siap pakai (memuat tabel verifikasi pod, kalibrasi hardware, tabel EFT kandidat, log transfer payload, dan perbandingan metrik).
+4. `results/execution_log.json`: Data mentah JSON hasil pembacaan metrik, timestamp, dan riwayat payload transfer.
 
 ---
 
-### Langkah 6: Pembersihan Klaster (Teardown)
+### Langkah 6: Panduan Pembersihan Total Klaster (Teardown & Cleanup)
 
-Setelah selesai menggunakan klaster, hapus seluruh resource Kind dengan perintah:
+Setelah selesai melakukan pengujian atau presentasi demo, ikuti langkah-langkah di bawah ini untuk mengembalikan kondisi laptop kamu menjadi bersih, membebaskan alokasi RAM (hemat 1.5 - 3 GB), dan menghemat baterai:
 
-#### Windows (PowerShell):
+#### 1. Hapus Klaster Kubernetes (Kind Cluster)
+Perintah ini akan menghapus 1 klaster Datacenter beserta 3 node container Docker (`control-plane`, `worker`, `worker2`), seluruh Pod VM, dan mapping port jaringan.
+
+**Di Windows (PowerShell):**
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\infra\teardown_cluster.ps1
 ```
+*Atau langsung via perintah kind:*
+```powershell
+kind delete cluster --name heft-datacenter
+```
 
-#### Linux / WSL2 (Bash):
+**Di Linux / WSL2 (Bash):**
 ```bash
 ./infra/teardown_cluster.sh
 ```
+
+#### 2. Verifikasi Container & Port Telah Bersih
+Pastikan tidak ada lagi container klaster yang tertinggal:
+```powershell
+docker ps
+```
+*(Pastikan tidak ada container bernama `heft-datacenter-*` di dalam daftar).*
+
+Pastikan port `30081 - 30084` sudah kembali bebas:
+```powershell
+netstat -ano | findstr "30081 30082 30083 30084"
+```
+*(Jika tidak ada output, artinya seluruh port telah dilepaskan dan bersih).*
+
+#### 3. Keluar dari Virtual Environment Python
+Ketik perintah berikut untuk menonaktifkan environment virtual Python di terminal:
+```powershell
+deactivate
+```
+*(Tanda `(.venv)` di sisi kiri prompt terminal akan hilang).*
+
+#### 4. (Opsional) Hapus Docker Image Worker untuk Menghemat Disk SSD
+Jika ingin menghapus image Docker worker lokal yang tadi dibangun (`~170 MB`):
+```powershell
+docker rmi heft-worker:latest
+```
+
+#### 5. (Opsional) Matikan Docker Desktop
+Jika kamu tidak sedang menggunakan Docker untuk keperluan lain dan ingin menghemat baterai/RAM laptop:
+- Klik kanan ikon **Docker Desktop** di system tray Windows (pojok kanan bawah taskbar).
+- Pilih **Quit Docker Desktop**.
+
+> 🛡️ **Catatan Keamanan Data:**  
+> Seluruh hasil laporan (`evaluation_report.md`), grafik (`gantt_comparison.png`, `makespan_runs.png`), dan data mentah (`execution_log.json`) **tetap aman tersimpan** di folder `results/` dan di repositori GitHub kamu. Menghapus klaster Kind **TIDAK** akan menghapus file-file hasil pengujian tersebut.  
+> Jika kamu ingin mendemokannya kembali di lain waktu, cukup jalankan lagi `setup_cluster.ps1` (klaster akan siap dalam waktu ~30 detik).
 
 ---
 
