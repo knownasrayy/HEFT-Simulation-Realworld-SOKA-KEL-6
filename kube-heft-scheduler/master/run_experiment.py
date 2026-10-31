@@ -87,16 +87,29 @@ async def main(runs: int, context: str, cooldown: float):
             "representative_run": rep_idx + 1,
         }, f, indent=2)
 
-    print("[6/6] Membuat Gantt Chart & laporan evaluasi...")
+    print("[6/6] Membuat visualisasi komparasi 3 dimensi & laporan akademis...")
     rep = all_runs[rep_idx]
     generate_gantt_chart(dag_data, heft_theo, rep["heft_actual"], rep["rr_actual"])
     generate_runs_chart(all_runs, heft_theo["theoretical_makespan"], rr_theo["theoretical_makespan"])
     generate_markdown_report(dag_data, calibration, heft_theo, rr_theo, all_runs, rep_idx, topology_text)
 
+    # Sinkronisasi laporan ke root jika dijalankan dari subfolder
+    if os.path.exists("results/LAPORAN_AKHIR_SOKA_KELOMPOK_6.md") and os.path.isdir("../"):
+        try:
+            import shutil
+            shutil.copy("results/LAPORAN_AKHIR_SOKA_KELOMPOK_6.md", "../LAPORAN_AKHIR_SOKA_KELOMPOK_6.md")
+        except Exception:
+            pass
+
     print(f"\nHEFT mean = {statistics.mean(heft_vals):.3f}s | "
           f"RR mean = {statistics.mean([r['rr_makespan'] for r in all_runs]):.3f}s")
-    print("Selesai! Cek results/gantt_comparison.png, results/makespan_runs.png, "
-          "results/evaluation_report.md")
+    print("Selesai! Seluruh artefak revisi telah berhasil di-generate:")
+    print("  -> results/three_dimensional_comparison.png")
+    print("  -> results/differentiation_gap_analysis.png")
+    print("  -> results/gantt_comparison.png")
+    print("  -> results/makespan_runs.png")
+    print("  -> results/LAPORAN_AKHIR_SOKA_KELOMPOK_6.md")
+    print("  -> results/evaluation_report.md")
 
 
 if __name__ == "__main__":
