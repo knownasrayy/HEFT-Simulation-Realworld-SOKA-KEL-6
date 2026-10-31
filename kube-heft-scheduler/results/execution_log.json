@@ -1,5 +1,5 @@
 {
-  "topology": "kubectl get nodes -L topology.host\nNAME                            STATUS   ROLES           AGE    VERSION   TOPOLOGY.HOST\nheft-datacenter-control-plane   Ready    control-plane   2m7s   v1.32.2   \nheft-datacenter-worker          Ready    <none>          114s   v1.32.2   host-1\nheft-datacenter-worker2         Ready    <none>          114s   v1.32.2   host-2\nkubectl get pods -o wide\nNAME          READY   STATUS    RESTARTS   AGE    IP           NODE                      NOMINATED NODE   READINESS GATES\nvm-worker-1   1/1     Running   0          104s   10.244.2.2   heft-datacenter-worker    <none>           <none>\nvm-worker-2   1/1     Running   0          104s   10.244.2.3   heft-datacenter-worker    <none>           <none>\nvm-worker-3   1/1     Running   0          104s   10.244.1.2   heft-datacenter-worker2   <none>           <none>\nvm-worker-4   1/1     Running   0          104s   10.244.1.3   heft-datacenter-worker2   <none>           <none>",
+  "topology": "kubectl get nodes -L topology.host\nNAME                            STATUS   ROLES           AGE   VERSION   TOPOLOGY.HOST\nheft-datacenter-control-plane   Ready    control-plane   72m   v1.32.2   \nheft-datacenter-worker          Ready    <none>          72m   v1.32.2   host-1\nheft-datacenter-worker2         Ready    <none>          72m   v1.32.2   host-2\nkubectl get pods -o wide\nNAME          READY   STATUS    RESTARTS   AGE   IP           NODE                      NOMINATED NODE   READINESS GATES\nvm-worker-1   1/1     Running   0          72m   10.244.2.2   heft-datacenter-worker    <none>           <none>\nvm-worker-2   1/1     Running   0          72m   10.244.2.3   heft-datacenter-worker    <none>           <none>\nvm-worker-3   1/1     Running   0          72m   10.244.1.2   heft-datacenter-worker2   <none>           <none>\nvm-worker-4   1/1     Running   0          72m   10.244.1.3   heft-datacenter-worker2   <none>           <none>",
   "calibration": {
     "health": {
       "vm-worker-1": {
@@ -41,8 +41,8 @@
         "host_id": "host-1",
         "cpu_limit": "1000m",
         "iterations": 1500000,
-        "elapsed_sec": 0.5426553349999779,
-        "iterations_per_sec": 2764185.4843278397,
+        "elapsed_sec": 0.36733391500001744,
+        "iterations_per_sec": 4083478.1073779394,
         "measured_speed_ratio": 1.0
       },
       "vm-worker-2": {
@@ -50,30 +50,30 @@
         "host_id": "host-1",
         "cpu_limit": "500m",
         "iterations": 1500000,
-        "elapsed_sec": 0.7320367560000136,
-        "iterations_per_sec": 2049077.4373083147,
-        "measured_speed_ratio": 0.7412952021222932
+        "elapsed_sec": 0.6283841579997897,
+        "iterations_per_sec": 2387074.8186501893,
+        "measured_speed_ratio": 0.5845690256884871
       },
       "vm-worker-3": {
         "vm_id": "vm-worker-3",
         "host_id": "host-2",
         "cpu_limit": "750m",
         "iterations": 1500000,
-        "elapsed_sec": 0.7629860760000042,
-        "iterations_per_sec": 1965959.8611075985,
-        "measured_speed_ratio": 0.7112257380172359
+        "elapsed_sec": 0.6343679010005872,
+        "iterations_per_sec": 2364558.4803929282,
+        "measured_speed_ratio": 0.5790550158994842
       },
       "vm-worker-4": {
         "vm_id": "vm-worker-4",
         "host_id": "host-2",
         "cpu_limit": "250m",
         "iterations": 1500000,
-        "elapsed_sec": 1.7150329970000087,
-        "iterations_per_sec": 874618.7406445524,
-        "measured_speed_ratio": 0.31641101713448555
+        "elapsed_sec": 2.3238106830003744,
+        "iterations_per_sec": 645491.4812867991,
+        "measured_speed_ratio": 0.15807394194682692
       }
     },
-    "iterations_per_sec_on_p1": 2764185.4843278397
+    "iterations_per_sec_on_p1": 4083478.1073779394
   },
   "heft_theoretical": {
     "algorithm": "HEFT",
@@ -680,8 +680,8 @@
   "runs": [
     {
       "run": 1,
-      "heft_makespan": 7.0872,
-      "rr_makespan": 14.1792,
+      "heft_makespan": 7.142,
+      "rr_makespan": 15.8735,
       "heft_actual": {
         "algorithm": "HEFT",
         "actual_results": {
@@ -690,120 +690,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
             "actual_ast": 0.0001,
-            "actual_aft": 1.5371,
-            "actual_duration": 1.5371,
-            "compute_time_sec": 1.2894
+            "actual_aft": 1.4288,
+            "actual_duration": 1.4287,
+            "compute_time_sec": 1.154
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2487766,
-            "data_ready_time": 1.5371,
-            "actual_ast": 1.5397,
-            "actual_aft": 2.6797,
-            "actual_duration": 1.14,
-            "compute_time_sec": 0.8623
+            "iterations": 3675130,
+            "data_ready_time": 1.4288,
+            "actual_ast": 1.4305,
+            "actual_aft": 2.6171,
+            "actual_duration": 1.1866,
+            "compute_time_sec": 0.8977
           },
           "T2": {
             "task_id": "T2",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 1.5371,
-            "actual_ast": 2.6798,
-            "actual_aft": 3.4241,
-            "actual_duration": 0.7443,
-            "compute_time_sec": 0.7347
+            "iterations": 4083478,
+            "data_ready_time": 1.4288,
+            "actual_ast": 2.6171,
+            "actual_aft": 3.525,
+            "actual_duration": 0.9079,
+            "compute_time_sec": 0.9036
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 2.2611,
-            "actual_ast": 2.2612,
-            "actual_aft": 3.5799,
-            "actual_duration": 1.3187,
-            "compute_time_sec": 1.042
+            "iterations": 2858434,
+            "data_ready_time": 2.1497,
+            "actual_ast": 2.1497,
+            "actual_aft": 3.59,
+            "actual_duration": 1.4402,
+            "compute_time_sec": 1.1708
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2211348,
-            "data_ready_time": 1.5371,
-            "actual_ast": 3.4243,
-            "actual_aft": 4.1355,
-            "actual_duration": 0.7112,
-            "compute_time_sec": 0.7007
+            "iterations": 3266782,
+            "data_ready_time": 1.4288,
+            "actual_ast": 3.5251,
+            "actual_aft": 4.2146,
+            "actual_duration": 0.6895,
+            "compute_time_sec": 0.6859
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 3040604,
-            "data_ready_time": 3.0202,
-            "actual_ast": 3.0203,
-            "actual_aft": 4.6747,
-            "actual_duration": 1.6544,
-            "compute_time_sec": 1.3857
+            "iterations": 4491825,
+            "data_ready_time": 2.9207,
+            "actual_ast": 2.9207,
+            "actual_aft": 4.4065,
+            "actual_duration": 1.4857,
+            "compute_time_sec": 1.2434
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 4.2116,
-            "actual_ast": 4.2117,
-            "actual_aft": 5.5713,
-            "actual_duration": 1.3597,
-            "compute_time_sec": 1.3532
-          },
-          "T8": {
-            "task_id": "T8",
-            "vm_id": "vm-worker-3",
-            "host_id": "host-2",
-            "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 4.8021,
-            "actual_ast": 4.8021,
-            "actual_aft": 5.9579,
-            "actual_duration": 1.1558,
-            "compute_time_sec": 1.1499
+            "iterations": 5308521,
+            "data_ready_time": 4.1955,
+            "actual_ast": 4.2147,
+            "actual_aft": 5.3713,
+            "actual_duration": 1.1567,
+            "compute_time_sec": 1.1539
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1658511,
-            "data_ready_time": 4.1355,
-            "actual_ast": 5.5714,
-            "actual_aft": 6.1318,
-            "actual_duration": 0.5604,
-            "compute_time_sec": 0.5539
+            "iterations": 2450086,
+            "data_ready_time": 4.2146,
+            "actual_ast": 5.3714,
+            "actual_aft": 5.8807,
+            "actual_duration": 0.5093,
+            "compute_time_sec": 0.5065
+          },
+          "T8": {
+            "task_id": "T8",
+            "vm_id": "vm-worker-3",
+            "host_id": "host-2",
+            "node_name": "heft-datacenter-worker2",
+            "iterations": 3675130,
+            "data_ready_time": 4.9004,
+            "actual_ast": 4.9005,
+            "actual_aft": 5.9265,
+            "actual_duration": 1.026,
+            "compute_time_sec": 1.0225
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 6.716,
-            "actual_ast": 6.7161,
-            "actual_aft": 7.0872,
-            "actual_duration": 0.3712,
-            "compute_time_sec": 0.3665
+            "iterations": 2041739,
+            "data_ready_time": 6.683,
+            "actual_ast": 6.6831,
+            "actual_aft": 7.142,
+            "actual_duration": 0.4589,
+            "compute_time_sec": 0.4541
           }
         },
         "transfers": [
@@ -814,10 +814,10 @@
             "link": "intra-host",
             "payload_kb": 700,
             "model_comm_sec": 0.7,
-            "real_transfer_sec": 0.0345,
-            "injected_latency_sec": 0.6655,
-            "send_start": 1.5373,
-            "arrival": 2.2611
+            "real_transfer_sec": 0.0497,
+            "injected_latency_sec": 0.6503,
+            "send_start": 1.4288,
+            "arrival": 2.1497
           },
           {
             "edge": "T1->T6",
@@ -826,10 +826,10 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.0842,
-            "injected_latency_sec": 1.1158,
-            "send_start": 1.5386,
-            "arrival": 3.0202
+            "real_transfer_sec": 0.1122,
+            "injected_latency_sec": 1.0878,
+            "send_start": 1.4299,
+            "arrival": 2.9207
           },
           {
             "edge": "T4->T8",
@@ -838,10 +838,10 @@
             "link": "inter-host",
             "payload_kb": 1300,
             "model_comm_sec": 1.95,
-            "real_transfer_sec": 0.1058,
-            "injected_latency_sec": 1.8442,
-            "send_start": 2.6816,
-            "arrival": 4.6681
+            "real_transfer_sec": 0.1422,
+            "injected_latency_sec": 1.8078,
+            "send_start": 2.6177,
+            "arrival": 4.5873
           },
           {
             "edge": "T2->T8",
@@ -850,10 +850,10 @@
             "link": "inter-host",
             "payload_kb": 900,
             "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.1293,
-            "injected_latency_sec": 1.2207,
-            "send_start": 3.4263,
-            "arrival": 4.8021
+            "real_transfer_sec": 0.1688,
+            "injected_latency_sec": 1.1812,
+            "send_start": 3.5256,
+            "arrival": 4.9004
           },
           {
             "edge": "T5->T9",
@@ -862,10 +862,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0562,
-            "injected_latency_sec": 0.5438,
-            "send_start": 3.58,
-            "arrival": 4.2116
+            "real_transfer_sec": 0.0773,
+            "injected_latency_sec": 0.5227,
+            "send_start": 3.59,
+            "arrival": 4.1955
           },
           {
             "edge": "T8->T10",
@@ -874,13 +874,13 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0758,
-            "injected_latency_sec": 0.6742,
-            "send_start": 5.958,
-            "arrival": 6.716
+            "real_transfer_sec": 0.0577,
+            "injected_latency_sec": 0.6923,
+            "send_start": 5.9265,
+            "arrival": 6.683
           }
         ],
-        "actual_makespan": 7.0872
+        "actual_makespan": 7.142
       },
       "rr_actual": {
         "algorithm": "Round-Robin",
@@ -890,120 +890,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
             "actual_ast": 0.0001,
-            "actual_aft": 1.4318,
-            "actual_duration": 1.4317,
-            "compute_time_sec": 1.1576
+            "actual_aft": 1.4582,
+            "actual_duration": 1.4581,
+            "compute_time_sec": 1.1982
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 1.4318,
-            "actual_ast": 1.4409,
-            "actual_aft": 2.5977,
-            "actual_duration": 1.1568,
-            "compute_time_sec": 0.8395
+            "iterations": 2858434,
+            "data_ready_time": 1.4582,
+            "actual_ast": 1.4606,
+            "actual_aft": 2.5229,
+            "actual_duration": 1.0623,
+            "compute_time_sec": 0.7962
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2211348,
-            "data_ready_time": 2.6322,
-            "actual_ast": 2.6328,
-            "actual_aft": 4.1664,
-            "actual_duration": 1.5336,
-            "compute_time_sec": 1.2204
+            "iterations": 3266782,
+            "data_ready_time": 2.701,
+            "actual_ast": 2.701,
+            "actual_aft": 3.9084,
+            "actual_duration": 1.2074,
+            "compute_time_sec": 0.9455
           },
           "T2": {
             "task_id": "T2",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 2.3684,
-            "actual_ast": 2.3685,
-            "actual_aft": 4.8865,
-            "actual_duration": 2.518,
-            "compute_time_sec": 2.2421
+            "iterations": 4083478,
+            "data_ready_time": 2.379,
+            "actual_ast": 2.379,
+            "actual_aft": 4.5823,
+            "actual_duration": 2.2033,
+            "compute_time_sec": 1.9343
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 1658511,
-            "data_ready_time": 4.1664,
-            "actual_ast": 4.1666,
-            "actual_aft": 4.9925,
-            "actual_duration": 0.826,
-            "compute_time_sec": 0.8168
+            "iterations": 2450086,
+            "data_ready_time": 3.9084,
+            "actual_ast": 3.9084,
+            "actual_aft": 4.59,
+            "actual_duration": 0.6816,
+            "compute_time_sec": 0.6791
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 2.5013,
-            "actual_ast": 2.5014,
-            "actual_aft": 6.7605,
-            "actual_duration": 4.2592,
-            "compute_time_sec": 4.0018
+            "iterations": 3675130,
+            "data_ready_time": 2.5237,
+            "actual_ast": 2.5238,
+            "actual_aft": 6.6817,
+            "actual_duration": 4.1579,
+            "compute_time_sec": 3.8902
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3040604,
-            "data_ready_time": 2.562,
-            "actual_ast": 4.8867,
-            "actual_aft": 7.4806,
-            "actual_duration": 2.5939,
-            "compute_time_sec": 2.5765
+            "iterations": 4491825,
+            "data_ready_time": 2.5376,
+            "actual_ast": 4.5824,
+            "actual_aft": 7.1755,
+            "actual_duration": 2.5931,
+            "compute_time_sec": 2.5866
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 8.4238,
-            "actual_ast": 8.4238,
-            "actual_aft": 9.9623,
-            "actual_duration": 1.5385,
-            "compute_time_sec": 1.2807
+            "iterations": 5308521,
+            "data_ready_time": 8.3385,
+            "actual_ast": 8.3385,
+            "actual_aft": 9.8025,
+            "actual_duration": 1.464,
+            "compute_time_sec": 1.1893
           },
           "T8": {
             "task_id": "T8",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 8.5415,
-            "actual_ast": 8.5416,
-            "actual_aft": 12.264,
-            "actual_duration": 3.7224,
-            "compute_time_sec": 3.7148
+            "iterations": 3675130,
+            "data_ready_time": 8.2317,
+            "actual_ast": 8.2318,
+            "actual_aft": 13.2807,
+            "actual_duration": 5.0489,
+            "compute_time_sec": 4.7894
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 13.0236,
-            "actual_ast": 13.0237,
-            "actual_aft": 14.1792,
-            "actual_duration": 1.1556,
-            "compute_time_sec": 1.148
+            "iterations": 2041739,
+            "data_ready_time": 14.0391,
+            "actual_ast": 14.0391,
+            "actual_aft": 15.8735,
+            "actual_duration": 1.8344,
+            "compute_time_sec": 1.5616
           }
         },
         "transfers": [
@@ -1014,10 +1014,10 @@
             "link": "intra-host",
             "payload_kb": 900,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.016,
-            "injected_latency_sec": 0.884,
-            "send_start": 1.432,
-            "arrival": 2.3684
+            "real_transfer_sec": 0.0143,
+            "injected_latency_sec": 0.8857,
+            "send_start": 1.4583,
+            "arrival": 2.379
           },
           {
             "edge": "T1->T3",
@@ -1026,10 +1026,10 @@
             "link": "inter-host",
             "payload_kb": 600,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.1808,
-            "injected_latency_sec": 0.7192,
-            "send_start": 1.434,
-            "arrival": 2.6322
+            "real_transfer_sec": 0.235,
+            "injected_latency_sec": 0.665,
+            "send_start": 1.4588,
+            "arrival": 2.701
           },
           {
             "edge": "T1->T4",
@@ -1038,10 +1038,10 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.168,
-            "injected_latency_sec": 0.582,
-            "send_start": 1.4362,
-            "arrival": 2.5013
+            "real_transfer_sec": 0.2469,
+            "injected_latency_sec": 0.5031,
+            "send_start": 1.4596,
+            "arrival": 2.5237
           },
           {
             "edge": "T1->T6",
@@ -1050,10 +1050,10 @@
             "link": "intra-host",
             "payload_kb": 800,
             "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.2095,
-            "injected_latency_sec": 0.5905,
-            "send_start": 1.4382,
-            "arrival": 2.562
+            "real_transfer_sec": 0.2805,
+            "injected_latency_sec": 0.5195,
+            "send_start": 1.4601,
+            "arrival": 2.5376
           },
           {
             "edge": "T2->T8",
@@ -1062,10 +1062,10 @@
             "link": "inter-host",
             "payload_kb": 900,
             "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.4089,
-            "injected_latency_sec": 0.9411,
-            "send_start": 4.8885,
-            "arrival": 6.6517
+            "real_transfer_sec": 0.5197,
+            "injected_latency_sec": 0.8303,
+            "send_start": 4.5833,
+            "arrival": 6.2754
           },
           {
             "edge": "T2->T9",
@@ -1074,10 +1074,10 @@
             "link": "intra-host",
             "payload_kb": 800,
             "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.3875,
-            "injected_latency_sec": 0.4125,
-            "send_start": 4.8901,
-            "arrival": 6.0461
+            "real_transfer_sec": 0.3263,
+            "injected_latency_sec": 0.4737,
+            "send_start": 4.5839,
+            "arrival": 5.8012
           },
           {
             "edge": "T7->T10",
@@ -1086,10 +1086,10 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.0792,
-            "injected_latency_sec": 1.1208,
-            "send_start": 4.9927,
-            "arrival": 6.2029
+            "real_transfer_sec": 0.0294,
+            "injected_latency_sec": 1.1706,
+            "send_start": 4.5901,
+            "arrival": 5.7959
           },
           {
             "edge": "T4->T9",
@@ -1098,10 +1098,10 @@
             "link": "inter-host",
             "payload_kb": 1100,
             "model_comm_sec": 1.65,
-            "real_transfer_sec": 0.1891,
-            "injected_latency_sec": 1.4609,
-            "send_start": 6.7607,
-            "arrival": 8.4238
+            "real_transfer_sec": 0.1098,
+            "injected_latency_sec": 1.5402,
+            "send_start": 6.6817,
+            "arrival": 8.3385
           },
           {
             "edge": "T6->T8",
@@ -1110,10 +1110,10 @@
             "link": "inter-host",
             "payload_kb": 700,
             "model_comm_sec": 1.05,
-            "real_transfer_sec": 0.0199,
-            "injected_latency_sec": 1.0301,
-            "send_start": 7.4807,
-            "arrival": 8.5415
+            "real_transfer_sec": 0.0087,
+            "injected_latency_sec": 1.0413,
+            "send_start": 7.1755,
+            "arrival": 8.2317
           },
           {
             "edge": "T9->T10",
@@ -1122,10 +1122,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0082,
-            "injected_latency_sec": 0.5918,
-            "send_start": 9.9624,
-            "arrival": 10.5711
+            "real_transfer_sec": 0.0064,
+            "injected_latency_sec": 0.5936,
+            "send_start": 9.8026,
+            "arrival": 10.4073
           },
           {
             "edge": "T8->T10",
@@ -1134,19 +1134,19 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0842,
-            "injected_latency_sec": 0.6658,
-            "send_start": 12.2641,
-            "arrival": 13.0236
+            "real_transfer_sec": 0.0154,
+            "injected_latency_sec": 0.7346,
+            "send_start": 13.2807,
+            "arrival": 14.0391
           }
         ],
-        "actual_makespan": 14.1792
+        "actual_makespan": 15.8735
       }
     },
     {
       "run": 2,
-      "heft_makespan": 7.3848,
-      "rr_makespan": 17.0036,
+      "heft_makespan": 7.7971,
+      "rr_makespan": 15.9615,
       "heft_actual": {
         "algorithm": "HEFT",
         "actual_results": {
@@ -1155,120 +1155,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
-            "actual_ast": 0.0002,
-            "actual_aft": 1.4386,
-            "actual_duration": 1.4384,
-            "compute_time_sec": 1.1699
+            "actual_ast": 0.0001,
+            "actual_aft": 1.8089,
+            "actual_duration": 1.8088,
+            "compute_time_sec": 1.5437
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2487766,
-            "data_ready_time": 1.4386,
-            "actual_ast": 1.4437,
-            "actual_aft": 2.5347,
-            "actual_duration": 1.0909,
-            "compute_time_sec": 0.8144
+            "iterations": 3675130,
+            "data_ready_time": 1.8089,
+            "actual_ast": 1.8106,
+            "actual_aft": 3.0846,
+            "actual_duration": 1.274,
+            "compute_time_sec": 1.0063
           },
           "T2": {
             "task_id": "T2",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 1.4386,
-            "actual_ast": 2.5348,
-            "actual_aft": 3.5425,
-            "actual_duration": 1.0077,
-            "compute_time_sec": 1.0008
+            "iterations": 4083478,
+            "data_ready_time": 1.8089,
+            "actual_ast": 3.0846,
+            "actual_aft": 3.9873,
+            "actual_duration": 0.9026,
+            "compute_time_sec": 0.8984
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 2.1674,
-            "actual_ast": 2.1675,
-            "actual_aft": 3.7419,
-            "actual_duration": 1.5744,
-            "compute_time_sec": 1.2999
+            "iterations": 2858434,
+            "data_ready_time": 2.5282,
+            "actual_ast": 2.5283,
+            "actual_aft": 4.0482,
+            "actual_duration": 1.5199,
+            "compute_time_sec": 1.2542
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2211348,
-            "data_ready_time": 1.4386,
-            "actual_ast": 3.5425,
-            "actual_aft": 4.3149,
-            "actual_duration": 0.7724,
-            "compute_time_sec": 0.7597
+            "iterations": 3266782,
+            "data_ready_time": 1.8089,
+            "actual_ast": 3.9873,
+            "actual_aft": 4.7097,
+            "actual_duration": 0.7224,
+            "compute_time_sec": 0.7181
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 3040604,
-            "data_ready_time": 2.9281,
-            "actual_ast": 2.9282,
-            "actual_aft": 4.5406,
-            "actual_duration": 1.6124,
-            "compute_time_sec": 1.3505
+            "iterations": 4491825,
+            "data_ready_time": 3.2962,
+            "actual_ast": 3.2962,
+            "actual_aft": 4.8495,
+            "actual_duration": 1.5533,
+            "compute_time_sec": 1.2889
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 4.3475,
-            "actual_ast": 4.3475,
-            "actual_aft": 5.6188,
-            "actual_duration": 1.2712,
-            "compute_time_sec": 1.2665
+            "iterations": 5308521,
+            "data_ready_time": 4.6526,
+            "actual_ast": 4.7098,
+            "actual_aft": 5.8931,
+            "actual_duration": 1.1833,
+            "compute_time_sec": 1.1805
           },
           "T8": {
             "task_id": "T8",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 4.9112,
-            "actual_ast": 4.9112,
-            "actual_aft": 6.0307,
-            "actual_duration": 1.1194,
-            "compute_time_sec": 1.1156
+            "iterations": 3675130,
+            "data_ready_time": 5.3633,
+            "actual_ast": 5.3633,
+            "actual_aft": 6.4025,
+            "actual_duration": 1.0392,
+            "compute_time_sec": 1.036
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1658511,
-            "data_ready_time": 4.3149,
-            "actual_ast": 5.6188,
-            "actual_aft": 6.1424,
-            "actual_duration": 0.5235,
-            "compute_time_sec": 0.5195
+            "iterations": 2450086,
+            "data_ready_time": 4.7097,
+            "actual_ast": 5.8932,
+            "actual_aft": 6.4197,
+            "actual_duration": 0.5265,
+            "compute_time_sec": 0.5236
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 6.7872,
-            "actual_ast": 6.7873,
-            "actual_aft": 7.3848,
-            "actual_duration": 0.5976,
-            "compute_time_sec": 0.5931
+            "iterations": 2041739,
+            "data_ready_time": 7.1591,
+            "actual_ast": 7.1592,
+            "actual_aft": 7.7971,
+            "actual_duration": 0.6379,
+            "compute_time_sec": 0.6335
           }
         },
         "transfers": [
@@ -1279,10 +1279,10 @@
             "link": "intra-host",
             "payload_kb": 700,
             "model_comm_sec": 0.7,
-            "real_transfer_sec": 0.0096,
-            "injected_latency_sec": 0.6904,
-            "send_start": 1.4387,
-            "arrival": 2.1674
+            "real_transfer_sec": 0.0131,
+            "injected_latency_sec": 0.6869,
+            "send_start": 1.8089,
+            "arrival": 2.5282
           },
           {
             "edge": "T1->T6",
@@ -1291,10 +1291,10 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.0946,
-            "injected_latency_sec": 1.1054,
-            "send_start": 1.4404,
-            "arrival": 2.9281
+            "real_transfer_sec": 0.1291,
+            "injected_latency_sec": 1.0709,
+            "send_start": 1.8098,
+            "arrival": 3.2962
           },
           {
             "edge": "T4->T8",
@@ -1303,10 +1303,10 @@
             "link": "inter-host",
             "payload_kb": 1300,
             "model_comm_sec": 1.95,
-            "real_transfer_sec": 0.1112,
-            "injected_latency_sec": 1.8388,
-            "send_start": 2.5361,
-            "arrival": 4.5166
+            "real_transfer_sec": 0.114,
+            "injected_latency_sec": 1.836,
+            "send_start": 3.0852,
+            "arrival": 5.0652
           },
           {
             "edge": "T2->T8",
@@ -1315,10 +1315,10 @@
             "link": "inter-host",
             "payload_kb": 900,
             "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.158,
-            "injected_latency_sec": 1.192,
-            "send_start": 3.5433,
-            "arrival": 4.9112
+            "real_transfer_sec": 0.186,
+            "injected_latency_sec": 1.164,
+            "send_start": 3.9878,
+            "arrival": 5.3633
           },
           {
             "edge": "T5->T9",
@@ -1327,10 +1327,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0396,
-            "injected_latency_sec": 0.5604,
-            "send_start": 3.7419,
-            "arrival": 4.3475
+            "real_transfer_sec": 0.0861,
+            "injected_latency_sec": 0.5139,
+            "send_start": 4.0482,
+            "arrival": 4.6526
           },
           {
             "edge": "T8->T10",
@@ -1339,13 +1339,13 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0393,
-            "injected_latency_sec": 0.7107,
-            "send_start": 6.0307,
-            "arrival": 6.7872
+            "real_transfer_sec": 0.0152,
+            "injected_latency_sec": 0.7348,
+            "send_start": 6.4026,
+            "arrival": 7.1591
           }
         ],
-        "actual_makespan": 7.3848
+        "actual_makespan": 7.7971
       },
       "rr_actual": {
         "algorithm": "Round-Robin",
@@ -1355,120 +1355,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
             "actual_ast": 0.0001,
-            "actual_aft": 1.5794,
-            "actual_duration": 1.5793,
-            "compute_time_sec": 1.3068
+            "actual_aft": 1.5076,
+            "actual_duration": 1.5075,
+            "compute_time_sec": 1.2388
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 1.5794,
-            "actual_ast": 1.5874,
-            "actual_aft": 2.9086,
-            "actual_duration": 1.3212,
-            "compute_time_sec": 0.9968
+            "iterations": 2858434,
+            "data_ready_time": 1.5076,
+            "actual_ast": 1.5106,
+            "actual_aft": 2.6048,
+            "actual_duration": 1.0943,
+            "compute_time_sec": 0.7971
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2211348,
-            "data_ready_time": 2.7956,
-            "actual_ast": 2.7957,
-            "actual_aft": 4.2958,
-            "actual_duration": 1.5001,
-            "compute_time_sec": 1.2366
+            "iterations": 3266782,
+            "data_ready_time": 2.7016,
+            "actual_ast": 2.7017,
+            "actual_aft": 3.8643,
+            "actual_duration": 1.1626,
+            "compute_time_sec": 0.8979
           },
           "T2": {
             "task_id": "T2",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 2.5136,
-            "actual_ast": 2.5136,
-            "actual_aft": 5.0992,
-            "actual_duration": 2.5856,
-            "compute_time_sec": 2.3186
+            "iterations": 4083478,
+            "data_ready_time": 2.4283,
+            "actual_ast": 2.4283,
+            "actual_aft": 4.4567,
+            "actual_duration": 2.0284,
+            "compute_time_sec": 1.7691
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 1658511,
-            "data_ready_time": 4.2958,
-            "actual_ast": 4.2959,
-            "actual_aft": 5.2615,
-            "actual_duration": 0.9656,
-            "compute_time_sec": 0.9593
+            "iterations": 2450086,
+            "data_ready_time": 3.8643,
+            "actual_ast": 3.8643,
+            "actual_aft": 4.5733,
+            "actual_duration": 0.7089,
+            "compute_time_sec": 0.7058
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 2.6552,
-            "actual_ast": 2.6553,
-            "actual_aft": 7.1302,
-            "actual_duration": 4.475,
-            "compute_time_sec": 4.2128
+            "iterations": 3675130,
+            "data_ready_time": 2.5451,
+            "actual_ast": 2.5451,
+            "actual_aft": 6.8262,
+            "actual_duration": 4.2811,
+            "compute_time_sec": 4.0154
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3040604,
-            "data_ready_time": 2.7163,
-            "actual_ast": 5.0993,
-            "actual_aft": 7.7053,
-            "actual_duration": 2.606,
-            "compute_time_sec": 2.5845
+            "iterations": 4491825,
+            "data_ready_time": 2.6155,
+            "actual_ast": 4.4568,
+            "actual_aft": 7.4784,
+            "actual_duration": 3.0216,
+            "compute_time_sec": 3.0139
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 8.7906,
-            "actual_ast": 8.7906,
-            "actual_aft": 11.0069,
-            "actual_duration": 2.2163,
-            "compute_time_sec": 1.9388
+            "iterations": 5308521,
+            "data_ready_time": 8.484,
+            "actual_ast": 8.4841,
+            "actual_aft": 10.0322,
+            "actual_duration": 1.5482,
+            "compute_time_sec": 1.274
           },
           "T8": {
             "task_id": "T8",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 8.7682,
-            "actual_ast": 8.7682,
-            "actual_aft": 14.4342,
-            "actual_duration": 5.666,
-            "compute_time_sec": 5.3993
+            "iterations": 3675130,
+            "data_ready_time": 8.5355,
+            "actual_ast": 8.5355,
+            "actual_aft": 13.3514,
+            "actual_duration": 4.8158,
+            "compute_time_sec": 4.8102
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 15.1959,
-            "actual_ast": 15.196,
-            "actual_aft": 17.0036,
-            "actual_duration": 1.8076,
-            "compute_time_sec": 1.5369
+            "iterations": 2041739,
+            "data_ready_time": 14.1108,
+            "actual_ast": 14.1109,
+            "actual_aft": 15.9615,
+            "actual_duration": 1.8506,
+            "compute_time_sec": 1.5873
           }
         },
         "transfers": [
@@ -1479,10 +1479,10 @@
             "link": "intra-host",
             "payload_kb": 900,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.0152,
-            "injected_latency_sec": 0.8848,
-            "send_start": 1.5795,
-            "arrival": 2.5136
+            "real_transfer_sec": 0.0072,
+            "injected_latency_sec": 0.8928,
+            "send_start": 1.5077,
+            "arrival": 2.4283
           },
           {
             "edge": "T1->T3",
@@ -1491,10 +1491,10 @@
             "link": "inter-host",
             "payload_kb": 600,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.1911,
-            "injected_latency_sec": 0.7089,
-            "send_start": 1.5811,
-            "arrival": 2.7956
+            "real_transfer_sec": 0.1769,
+            "injected_latency_sec": 0.7231,
+            "send_start": 1.5082,
+            "arrival": 2.7016
           },
           {
             "edge": "T1->T4",
@@ -1503,10 +1503,10 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.1808,
-            "injected_latency_sec": 0.5692,
-            "send_start": 1.5826,
-            "arrival": 2.6552
+            "real_transfer_sec": 0.1905,
+            "injected_latency_sec": 0.5595,
+            "send_start": 1.5086,
+            "arrival": 2.5451
           },
           {
             "edge": "T1->T6",
@@ -1515,10 +1515,10 @@
             "link": "intra-host",
             "payload_kb": 800,
             "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.1932,
-            "injected_latency_sec": 0.6068,
-            "send_start": 1.5854,
-            "arrival": 2.7163
+            "real_transfer_sec": 0.1815,
+            "injected_latency_sec": 0.6185,
+            "send_start": 1.51,
+            "arrival": 2.6155
           },
           {
             "edge": "T2->T8",
@@ -1527,10 +1527,10 @@
             "link": "inter-host",
             "payload_kb": 900,
             "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.4023,
-            "injected_latency_sec": 0.9477,
-            "send_start": 5.1012,
-            "arrival": 6.8002
+            "real_transfer_sec": 0.5108,
+            "injected_latency_sec": 0.8392,
+            "send_start": 4.4573,
+            "arrival": 6.1483
           },
           {
             "edge": "T2->T9",
@@ -1539,10 +1539,10 @@
             "link": "intra-host",
             "payload_kb": 800,
             "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.3469,
-            "injected_latency_sec": 0.4531,
-            "send_start": 5.1033,
-            "arrival": 6.1982
+            "real_transfer_sec": 0.3724,
+            "injected_latency_sec": 0.4276,
+            "send_start": 4.4578,
+            "arrival": 5.6924
           },
           {
             "edge": "T7->T10",
@@ -1551,10 +1551,10 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.0628,
-            "injected_latency_sec": 1.1372,
-            "send_start": 5.2616,
-            "arrival": 6.4702
+            "real_transfer_sec": 0.093,
+            "injected_latency_sec": 1.107,
+            "send_start": 4.5733,
+            "arrival": 5.7781
           },
           {
             "edge": "T4->T9",
@@ -1563,10 +1563,10 @@
             "link": "inter-host",
             "payload_kb": 1100,
             "model_comm_sec": 1.65,
-            "real_transfer_sec": 0.0145,
-            "injected_latency_sec": 1.6355,
-            "send_start": 7.1304,
-            "arrival": 8.7906
+            "real_transfer_sec": 0.0264,
+            "injected_latency_sec": 1.6236,
+            "send_start": 6.8263,
+            "arrival": 8.484
           },
           {
             "edge": "T6->T8",
@@ -1575,10 +1575,10 @@
             "link": "inter-host",
             "payload_kb": 700,
             "model_comm_sec": 1.05,
-            "real_transfer_sec": 0.0167,
-            "injected_latency_sec": 1.0333,
-            "send_start": 7.7055,
-            "arrival": 8.7682
+            "real_transfer_sec": 0.0589,
+            "injected_latency_sec": 0.9911,
+            "send_start": 7.4784,
+            "arrival": 8.5355
           },
           {
             "edge": "T9->T10",
@@ -1587,10 +1587,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0162,
-            "injected_latency_sec": 0.5838,
-            "send_start": 11.0071,
-            "arrival": 11.6203
+            "real_transfer_sec": 0.0111,
+            "injected_latency_sec": 0.5889,
+            "send_start": 10.0323,
+            "arrival": 10.6391
           },
           {
             "edge": "T8->T10",
@@ -1599,19 +1599,19 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0898,
-            "injected_latency_sec": 0.6602,
-            "send_start": 14.4343,
-            "arrival": 15.1959
+            "real_transfer_sec": 0.0959,
+            "injected_latency_sec": 0.6541,
+            "send_start": 13.3515,
+            "arrival": 14.1108
           }
         ],
-        "actual_makespan": 17.0036
+        "actual_makespan": 15.9615
       }
     },
     {
       "run": 3,
-      "heft_makespan": 6.5286,
-      "rr_makespan": 14.7738,
+      "heft_makespan": 7.5062,
+      "rr_makespan": 16.3233,
       "heft_actual": {
         "algorithm": "HEFT",
         "actual_results": {
@@ -1620,120 +1620,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
             "actual_ast": 0.0001,
-            "actual_aft": 1.2367,
-            "actual_duration": 1.2366,
-            "compute_time_sec": 0.9667
+            "actual_aft": 1.6724,
+            "actual_duration": 1.6723,
+            "compute_time_sec": 1.409
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2487766,
-            "data_ready_time": 1.2367,
-            "actual_ast": 1.238,
-            "actual_aft": 2.2034,
-            "actual_duration": 0.9654,
-            "compute_time_sec": 0.6938
+            "iterations": 3675130,
+            "data_ready_time": 1.6724,
+            "actual_ast": 1.6735,
+            "actual_aft": 2.8913,
+            "actual_duration": 1.2178,
+            "compute_time_sec": 0.9486
           },
           "T2": {
             "task_id": "T2",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 1.2367,
-            "actual_ast": 2.2034,
-            "actual_aft": 2.98,
-            "actual_duration": 0.7766,
-            "compute_time_sec": 0.7717
+            "iterations": 4083478,
+            "data_ready_time": 1.6724,
+            "actual_ast": 2.8914,
+            "actual_aft": 3.7895,
+            "actual_duration": 0.8982,
+            "compute_time_sec": 0.8945
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 1.9554,
-            "actual_ast": 1.9554,
-            "actual_aft": 3.228,
-            "actual_duration": 1.2726,
-            "compute_time_sec": 1.0141
+            "iterations": 2858434,
+            "data_ready_time": 2.3896,
+            "actual_ast": 2.3896,
+            "actual_aft": 3.8615,
+            "actual_duration": 1.4719,
+            "compute_time_sec": 1.2124
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2211348,
-            "data_ready_time": 1.2367,
-            "actual_ast": 2.9804,
-            "actual_aft": 3.6932,
-            "actual_duration": 0.7127,
-            "compute_time_sec": 0.7049
+            "iterations": 3266782,
+            "data_ready_time": 1.6724,
+            "actual_ast": 3.7896,
+            "actual_aft": 4.5271,
+            "actual_duration": 0.7375,
+            "compute_time_sec": 0.7328
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 3040604,
-            "data_ready_time": 2.7311,
-            "actual_ast": 2.7312,
-            "actual_aft": 4.1319,
-            "actual_duration": 1.4008,
-            "compute_time_sec": 1.1406
+            "iterations": 4491825,
+            "data_ready_time": 3.1528,
+            "actual_ast": 3.1528,
+            "actual_aft": 4.686,
+            "actual_duration": 1.5332,
+            "compute_time_sec": 1.2755
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 3.8386,
-            "actual_ast": 3.8387,
-            "actual_aft": 4.8383,
-            "actual_duration": 0.9997,
-            "compute_time_sec": 0.9928
-          },
-          "T8": {
-            "task_id": "T8",
-            "vm_id": "vm-worker-3",
-            "host_id": "host-2",
-            "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 4.3613,
-            "actual_ast": 4.3614,
-            "actual_aft": 5.233,
-            "actual_duration": 0.8717,
-            "compute_time_sec": 0.8636
+            "iterations": 5308521,
+            "data_ready_time": 4.4673,
+            "actual_ast": 4.5272,
+            "actual_aft": 5.6605,
+            "actual_duration": 1.1333,
+            "compute_time_sec": 1.128
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1658511,
-            "data_ready_time": 3.6932,
-            "actual_ast": 4.8384,
-            "actual_aft": 5.2584,
-            "actual_duration": 0.4199,
-            "compute_time_sec": 0.4134
+            "iterations": 2450086,
+            "data_ready_time": 4.5271,
+            "actual_ast": 5.6605,
+            "actual_aft": 6.1689,
+            "actual_duration": 0.5084,
+            "compute_time_sec": 0.5045
+          },
+          "T8": {
+            "task_id": "T8",
+            "vm_id": "vm-worker-3",
+            "host_id": "host-2",
+            "node_name": "heft-datacenter-worker2",
+            "iterations": 3675130,
+            "data_ready_time": 5.1603,
+            "actual_ast": 5.1604,
+            "actual_aft": 6.1825,
+            "actual_duration": 1.0221,
+            "compute_time_sec": 1.019
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 5.9921,
-            "actual_ast": 5.9922,
-            "actual_aft": 6.5286,
-            "actual_duration": 0.5365,
-            "compute_time_sec": 0.5284
+            "iterations": 2041739,
+            "data_ready_time": 6.9378,
+            "actual_ast": 6.9378,
+            "actual_aft": 7.5062,
+            "actual_duration": 0.5683,
+            "compute_time_sec": 0.5639
           }
         },
         "transfers": [
@@ -1744,10 +1744,10 @@
             "link": "intra-host",
             "payload_kb": 700,
             "model_comm_sec": 0.7,
-            "real_transfer_sec": 0.0075,
-            "injected_latency_sec": 0.6925,
-            "send_start": 1.2368,
-            "arrival": 1.9554
+            "real_transfer_sec": 0.0111,
+            "injected_latency_sec": 0.6889,
+            "send_start": 1.6725,
+            "arrival": 2.3896
           },
           {
             "edge": "T1->T6",
@@ -1756,10 +1756,10 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.1262,
-            "injected_latency_sec": 1.0738,
-            "send_start": 1.2374,
-            "arrival": 2.7311
+            "real_transfer_sec": 0.09,
+            "injected_latency_sec": 1.11,
+            "send_start": 1.673,
+            "arrival": 3.1528
           },
           {
             "edge": "T4->T8",
@@ -1768,10 +1768,10 @@
             "link": "inter-host",
             "payload_kb": 1300,
             "model_comm_sec": 1.95,
-            "real_transfer_sec": 0.1167,
-            "injected_latency_sec": 1.8333,
-            "send_start": 2.2041,
-            "arrival": 4.1865
+            "real_transfer_sec": 0.1153,
+            "injected_latency_sec": 1.8347,
+            "send_start": 2.8919,
+            "arrival": 4.8618
           },
           {
             "edge": "T2->T8",
@@ -1780,10 +1780,10 @@
             "link": "inter-host",
             "payload_kb": 900,
             "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.1509,
-            "injected_latency_sec": 1.1991,
-            "send_start": 2.9813,
-            "arrival": 4.3613
+            "real_transfer_sec": 0.1787,
+            "injected_latency_sec": 1.1713,
+            "send_start": 3.7901,
+            "arrival": 5.1603
           },
           {
             "edge": "T5->T9",
@@ -1792,10 +1792,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0407,
-            "injected_latency_sec": 0.5593,
-            "send_start": 3.2281,
-            "arrival": 3.8386
+            "real_transfer_sec": 0.0553,
+            "injected_latency_sec": 0.5447,
+            "send_start": 3.8615,
+            "arrival": 4.4673
           },
           {
             "edge": "T8->T10",
@@ -1804,13 +1804,13 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0262,
-            "injected_latency_sec": 0.7238,
-            "send_start": 5.2332,
-            "arrival": 5.9921
+            "real_transfer_sec": 0.0104,
+            "injected_latency_sec": 0.7396,
+            "send_start": 6.1825,
+            "arrival": 6.9378
           }
         ],
-        "actual_makespan": 6.5286
+        "actual_makespan": 7.5062
       },
       "rr_actual": {
         "algorithm": "Round-Robin",
@@ -1820,120 +1820,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
-            "actual_ast": 0.0002,
-            "actual_aft": 1.9953,
-            "actual_duration": 1.9952,
-            "compute_time_sec": 1.7332
+            "actual_ast": 0.0001,
+            "actual_aft": 1.6234,
+            "actual_duration": 1.6233,
+            "compute_time_sec": 1.3578
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 1.9953,
-            "actual_ast": 2.0032,
-            "actual_aft": 3.4328,
-            "actual_duration": 1.4297,
-            "compute_time_sec": 1.0823
+            "iterations": 2858434,
+            "data_ready_time": 1.6234,
+            "actual_ast": 1.627,
+            "actual_aft": 2.8087,
+            "actual_duration": 1.1816,
+            "compute_time_sec": 0.8867
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2211348,
-            "data_ready_time": 3.2147,
-            "actual_ast": 3.2148,
-            "actual_aft": 4.4699,
-            "actual_duration": 1.255,
-            "compute_time_sec": 0.9826
+            "iterations": 3266782,
+            "data_ready_time": 2.8061,
+            "actual_ast": 2.8061,
+            "actual_aft": 4.2105,
+            "actual_duration": 1.4043,
+            "compute_time_sec": 1.1391
           },
           "T2": {
             "task_id": "T2",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 2.9311,
-            "actual_ast": 2.9312,
-            "actual_aft": 5.2177,
-            "actual_duration": 2.2865,
-            "compute_time_sec": 2.0241
+            "iterations": 4083478,
+            "data_ready_time": 2.5384,
+            "actual_ast": 2.5385,
+            "actual_aft": 4.9055,
+            "actual_duration": 2.3671,
+            "compute_time_sec": 2.1149
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 1658511,
-            "data_ready_time": 4.4699,
-            "actual_ast": 4.47,
-            "actual_aft": 5.4339,
-            "actual_duration": 0.9639,
-            "compute_time_sec": 0.9574
+            "iterations": 2450086,
+            "data_ready_time": 4.2105,
+            "actual_ast": 4.2105,
+            "actual_aft": 4.9137,
+            "actual_duration": 0.7032,
+            "compute_time_sec": 0.7003
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 3.0856,
-            "actual_ast": 3.0857,
-            "actual_aft": 7.2355,
-            "actual_duration": 4.1499,
-            "compute_time_sec": 3.8709
+            "iterations": 3675130,
+            "data_ready_time": 2.6629,
+            "actual_ast": 2.663,
+            "actual_aft": 7.0182,
+            "actual_duration": 4.3551,
+            "compute_time_sec": 4.0844
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3040604,
-            "data_ready_time": 3.1523,
-            "actual_ast": 5.2178,
-            "actual_aft": 7.7573,
-            "actual_duration": 2.5395,
-            "compute_time_sec": 2.5232
+            "iterations": 4491825,
+            "data_ready_time": 2.7241,
+            "actual_ast": 4.9056,
+            "actual_aft": 8.0166,
+            "actual_duration": 3.1111,
+            "compute_time_sec": 3.1043
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 8.895,
-            "actual_ast": 8.8951,
-            "actual_aft": 10.436,
-            "actual_duration": 1.5409,
-            "compute_time_sec": 1.2679
+            "iterations": 5308521,
+            "data_ready_time": 8.6788,
+            "actual_ast": 8.6789,
+            "actual_aft": 10.256,
+            "actual_duration": 1.5771,
+            "compute_time_sec": 1.3124
           },
           "T8": {
             "task_id": "T8",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 8.8165,
-            "actual_ast": 8.8166,
-            "actual_aft": 12.8378,
-            "actual_duration": 4.0212,
-            "compute_time_sec": 3.7462
+            "iterations": 3675130,
+            "data_ready_time": 9.0749,
+            "actual_ast": 9.0749,
+            "actual_aft": 13.9707,
+            "actual_duration": 4.8957,
+            "compute_time_sec": 4.8908
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 13.6532,
-            "actual_ast": 13.6533,
-            "actual_aft": 14.7738,
-            "actual_duration": 1.1206,
-            "compute_time_sec": 1.1117
+            "iterations": 2041739,
+            "data_ready_time": 14.728,
+            "actual_ast": 14.728,
+            "actual_aft": 16.3233,
+            "actual_duration": 1.5953,
+            "compute_time_sec": 1.3323
           }
         },
         "transfers": [
@@ -1944,10 +1944,10 @@
             "link": "intra-host",
             "payload_kb": 900,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.0211,
-            "injected_latency_sec": 0.8789,
-            "send_start": 1.9955,
-            "arrival": 2.9311
+            "real_transfer_sec": 0.0083,
+            "injected_latency_sec": 0.8917,
+            "send_start": 1.6235,
+            "arrival": 2.5384
           },
           {
             "edge": "T1->T3",
@@ -1956,10 +1956,10 @@
             "link": "inter-host",
             "payload_kb": 600,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.2366,
-            "injected_latency_sec": 0.6634,
-            "send_start": 1.9973,
-            "arrival": 3.2147
+            "real_transfer_sec": 0.199,
+            "injected_latency_sec": 0.701,
+            "send_start": 1.6252,
+            "arrival": 2.8061
           },
           {
             "edge": "T1->T4",
@@ -1968,10 +1968,10 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.2323,
-            "injected_latency_sec": 0.5177,
-            "send_start": 1.9995,
-            "arrival": 3.0856
+            "real_transfer_sec": 0.1909,
+            "injected_latency_sec": 0.5591,
+            "send_start": 1.6257,
+            "arrival": 2.6629
           },
           {
             "edge": "T1->T6",
@@ -1980,10 +1980,10 @@
             "link": "intra-host",
             "payload_kb": 800,
             "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.2435,
-            "injected_latency_sec": 0.5565,
-            "send_start": 2.0013,
-            "arrival": 3.1523
+            "real_transfer_sec": 0.1866,
+            "injected_latency_sec": 0.6134,
+            "send_start": 1.6263,
+            "arrival": 2.7241
           },
           {
             "edge": "T2->T8",
@@ -1992,10 +1992,10 @@
             "link": "inter-host",
             "payload_kb": 900,
             "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.5384,
-            "injected_latency_sec": 0.8116,
-            "send_start": 5.2196,
-            "arrival": 7.0103
+            "real_transfer_sec": 0.5113,
+            "injected_latency_sec": 0.8387,
+            "send_start": 4.9061,
+            "arrival": 6.5973
           },
           {
             "edge": "T2->T9",
@@ -2004,10 +2004,10 @@
             "link": "intra-host",
             "payload_kb": 800,
             "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.464,
-            "injected_latency_sec": 0.336,
-            "send_start": 5.2213,
-            "arrival": 6.3995
+            "real_transfer_sec": 0.3283,
+            "injected_latency_sec": 0.4717,
+            "send_start": 4.9067,
+            "arrival": 6.1086
           },
           {
             "edge": "T7->T10",
@@ -2016,10 +2016,10 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.296,
-            "injected_latency_sec": 0.904,
-            "send_start": 5.434,
-            "arrival": 6.6435
+            "real_transfer_sec": 0.0291,
+            "injected_latency_sec": 1.1709,
+            "send_start": 4.9138,
+            "arrival": 6.1191
           },
           {
             "edge": "T4->T9",
@@ -2028,10 +2028,10 @@
             "link": "inter-host",
             "payload_kb": 1100,
             "model_comm_sec": 1.65,
-            "real_transfer_sec": 0.0152,
-            "injected_latency_sec": 1.6348,
-            "send_start": 7.2357,
-            "arrival": 8.895
+            "real_transfer_sec": 0.0893,
+            "injected_latency_sec": 1.5607,
+            "send_start": 7.0183,
+            "arrival": 8.6788
           },
           {
             "edge": "T6->T8",
@@ -2040,10 +2040,10 @@
             "link": "inter-host",
             "payload_kb": 700,
             "model_comm_sec": 1.05,
-            "real_transfer_sec": 0.0412,
-            "injected_latency_sec": 1.0088,
-            "send_start": 7.7574,
-            "arrival": 8.8165
+            "real_transfer_sec": 0.0165,
+            "injected_latency_sec": 1.0335,
+            "send_start": 8.0167,
+            "arrival": 9.0749
           },
           {
             "edge": "T9->T10",
@@ -2052,10 +2052,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0083,
-            "injected_latency_sec": 0.5917,
-            "send_start": 10.4361,
-            "arrival": 11.0435
+            "real_transfer_sec": 0.0079,
+            "injected_latency_sec": 0.5921,
+            "send_start": 10.256,
+            "arrival": 10.8615
           },
           {
             "edge": "T8->T10",
@@ -2064,19 +2064,19 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0266,
-            "injected_latency_sec": 0.7234,
-            "send_start": 12.8378,
-            "arrival": 13.6532
+            "real_transfer_sec": 0.0228,
+            "injected_latency_sec": 0.7272,
+            "send_start": 13.9707,
+            "arrival": 14.728
           }
         ],
-        "actual_makespan": 14.7738
+        "actual_makespan": 16.3233
       }
     },
     {
       "run": 4,
-      "heft_makespan": 6.9012,
-      "rr_makespan": 14.9586,
+      "heft_makespan": 6.9949,
+      "rr_makespan": 15.7505,
       "heft_actual": {
         "algorithm": "HEFT",
         "actual_results": {
@@ -2085,120 +2085,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
-            "actual_ast": 0.0003,
-            "actual_aft": 1.2441,
-            "actual_duration": 1.2439,
-            "compute_time_sec": 0.9733
+            "actual_ast": 0.0001,
+            "actual_aft": 1.3447,
+            "actual_duration": 1.3446,
+            "compute_time_sec": 1.0754
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2487766,
-            "data_ready_time": 1.2441,
-            "actual_ast": 1.2479,
-            "actual_aft": 2.4867,
-            "actual_duration": 1.2389,
-            "compute_time_sec": 0.9578
+            "iterations": 3675130,
+            "data_ready_time": 1.3447,
+            "actual_ast": 1.346,
+            "actual_aft": 2.5086,
+            "actual_duration": 1.1626,
+            "compute_time_sec": 0.8895
           },
           "T2": {
             "task_id": "T2",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 1.2441,
-            "actual_ast": 2.4869,
-            "actual_aft": 3.3358,
-            "actual_duration": 0.849,
-            "compute_time_sec": 0.8354
+            "iterations": 4083478,
+            "data_ready_time": 1.3447,
+            "actual_ast": 2.5087,
+            "actual_aft": 3.4178,
+            "actual_duration": 0.9092,
+            "compute_time_sec": 0.9054
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 1.9749,
-            "actual_ast": 1.9749,
-            "actual_aft": 3.3839,
-            "actual_duration": 1.409,
-            "compute_time_sec": 1.1441
+            "iterations": 2858434,
+            "data_ready_time": 2.0641,
+            "actual_ast": 2.0641,
+            "actual_aft": 3.5,
+            "actual_duration": 1.4359,
+            "compute_time_sec": 1.1662
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2211348,
-            "data_ready_time": 1.2441,
-            "actual_ast": 3.3359,
-            "actual_aft": 3.9442,
-            "actual_duration": 0.6083,
-            "compute_time_sec": 0.5986
+            "iterations": 3266782,
+            "data_ready_time": 1.3447,
+            "actual_ast": 3.4179,
+            "actual_aft": 4.1335,
+            "actual_duration": 0.7157,
+            "compute_time_sec": 0.7113
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 3040604,
-            "data_ready_time": 2.7331,
-            "actual_ast": 2.7332,
-            "actual_aft": 4.0566,
-            "actual_duration": 1.3234,
-            "compute_time_sec": 1.0576
+            "iterations": 4491825,
+            "data_ready_time": 2.8432,
+            "actual_ast": 2.8432,
+            "actual_aft": 4.35,
+            "actual_duration": 1.5068,
+            "compute_time_sec": 1.2367
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 4.0342,
-            "actual_ast": 4.0344,
-            "actual_aft": 5.2575,
-            "actual_duration": 1.2232,
-            "compute_time_sec": 1.2162
-          },
-          "T8": {
-            "task_id": "T8",
-            "vm_id": "vm-worker-3",
-            "host_id": "host-2",
-            "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 4.7246,
-            "actual_ast": 4.7247,
-            "actual_aft": 5.6929,
-            "actual_duration": 0.9682,
-            "compute_time_sec": 0.96
+            "iterations": 5308521,
+            "data_ready_time": 4.1043,
+            "actual_ast": 4.1336,
+            "actual_aft": 5.2675,
+            "actual_duration": 1.134,
+            "compute_time_sec": 1.1309
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1658511,
-            "data_ready_time": 3.9442,
-            "actual_ast": 5.2577,
-            "actual_aft": 5.7345,
-            "actual_duration": 0.4769,
-            "compute_time_sec": 0.4706
+            "iterations": 2450086,
+            "data_ready_time": 4.1335,
+            "actual_ast": 5.2676,
+            "actual_aft": 5.7841,
+            "actual_duration": 0.5165,
+            "compute_time_sec": 0.5127
+          },
+          "T8": {
+            "task_id": "T8",
+            "vm_id": "vm-worker-3",
+            "host_id": "host-2",
+            "node_name": "heft-datacenter-worker2",
+            "iterations": 3675130,
+            "data_ready_time": 4.7941,
+            "actual_ast": 4.7941,
+            "actual_aft": 5.8037,
+            "actual_duration": 1.0096,
+            "compute_time_sec": 1.0059
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 6.453,
-            "actual_ast": 6.453,
-            "actual_aft": 6.9012,
-            "actual_duration": 0.4481,
-            "compute_time_sec": 0.4415
+            "iterations": 2041739,
+            "data_ready_time": 6.5582,
+            "actual_ast": 6.5582,
+            "actual_aft": 6.9949,
+            "actual_duration": 0.4367,
+            "compute_time_sec": 0.4332
           }
         },
         "transfers": [
@@ -2209,10 +2209,10 @@
             "link": "intra-host",
             "payload_kb": 700,
             "model_comm_sec": 0.7,
-            "real_transfer_sec": 0.0106,
-            "injected_latency_sec": 0.6894,
-            "send_start": 1.2444,
-            "arrival": 1.9749
+            "real_transfer_sec": 0.0111,
+            "injected_latency_sec": 0.6889,
+            "send_start": 1.3447,
+            "arrival": 2.0641
           },
           {
             "edge": "T1->T6",
@@ -2221,10 +2221,10 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.0684,
-            "injected_latency_sec": 1.1316,
-            "send_start": 1.2462,
-            "arrival": 2.7331
+            "real_transfer_sec": 0.138,
+            "injected_latency_sec": 1.062,
+            "send_start": 1.3454,
+            "arrival": 2.8432
           },
           {
             "edge": "T4->T8",
@@ -2233,10 +2233,10 @@
             "link": "inter-host",
             "payload_kb": 1300,
             "model_comm_sec": 1.95,
-            "real_transfer_sec": 0.0957,
-            "injected_latency_sec": 1.8543,
-            "send_start": 2.4897,
-            "arrival": 4.4715
+            "real_transfer_sec": 0.1244,
+            "injected_latency_sec": 1.8256,
+            "send_start": 2.5092,
+            "arrival": 4.4841
           },
           {
             "edge": "T2->T8",
@@ -2245,10 +2245,10 @@
             "link": "inter-host",
             "payload_kb": 900,
             "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.1233,
-            "injected_latency_sec": 1.2267,
-            "send_start": 3.3378,
-            "arrival": 4.7246
+            "real_transfer_sec": 0.1659,
+            "injected_latency_sec": 1.1841,
+            "send_start": 3.4187,
+            "arrival": 4.7941
           },
           {
             "edge": "T5->T9",
@@ -2257,10 +2257,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0725,
-            "injected_latency_sec": 0.5275,
-            "send_start": 3.384,
-            "arrival": 4.0342
+            "real_transfer_sec": 0.058,
+            "injected_latency_sec": 0.542,
+            "send_start": 3.5001,
+            "arrival": 4.1043
           },
           {
             "edge": "T8->T10",
@@ -2269,13 +2269,13 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0349,
-            "injected_latency_sec": 0.7151,
-            "send_start": 5.693,
-            "arrival": 6.453
+            "real_transfer_sec": 0.0063,
+            "injected_latency_sec": 0.7437,
+            "send_start": 5.8038,
+            "arrival": 6.5582
           }
         ],
-        "actual_makespan": 6.9012
+        "actual_makespan": 6.9949
       },
       "rr_actual": {
         "algorithm": "Round-Robin",
@@ -2285,120 +2285,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
-            "actual_ast": 0.0002,
-            "actual_aft": 1.6899,
-            "actual_duration": 1.6897,
-            "compute_time_sec": 1.4221
+            "actual_ast": 0.0001,
+            "actual_aft": 1.5353,
+            "actual_duration": 1.5351,
+            "compute_time_sec": 1.2626
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 1.6899,
-            "actual_ast": 1.6998,
-            "actual_aft": 2.8008,
-            "actual_duration": 1.101,
-            "compute_time_sec": 0.7887
+            "iterations": 2858434,
+            "data_ready_time": 1.5353,
+            "actual_ast": 1.5376,
+            "actual_aft": 2.6802,
+            "actual_duration": 1.1426,
+            "compute_time_sec": 0.851
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2211348,
-            "data_ready_time": 2.8768,
-            "actual_ast": 2.8775,
-            "actual_aft": 4.1466,
-            "actual_duration": 1.269,
-            "compute_time_sec": 0.993
+            "iterations": 3266782,
+            "data_ready_time": 2.7369,
+            "actual_ast": 2.7369,
+            "actual_aft": 4.0227,
+            "actual_duration": 1.2858,
+            "compute_time_sec": 1.0158
           },
           "T2": {
             "task_id": "T2",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 2.625,
-            "actual_ast": 2.625,
-            "actual_aft": 4.7089,
-            "actual_duration": 2.0839,
-            "compute_time_sec": 1.8213
+            "iterations": 4083478,
+            "data_ready_time": 2.4495,
+            "actual_ast": 2.4495,
+            "actual_aft": 4.6046,
+            "actual_duration": 2.155,
+            "compute_time_sec": 1.8948
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 1658511,
-            "data_ready_time": 4.1466,
-            "actual_ast": 4.1467,
-            "actual_aft": 4.9252,
-            "actual_duration": 0.7784,
-            "compute_time_sec": 0.7722
+            "iterations": 2450086,
+            "data_ready_time": 4.0227,
+            "actual_ast": 4.0228,
+            "actual_aft": 4.7377,
+            "actual_duration": 0.7149,
+            "compute_time_sec": 0.7117
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 2.7283,
-            "actual_ast": 2.7284,
-            "actual_aft": 6.7035,
-            "actual_duration": 3.9751,
-            "compute_time_sec": 3.6921
+            "iterations": 3675130,
+            "data_ready_time": 2.5874,
+            "actual_ast": 2.5874,
+            "actual_aft": 6.6142,
+            "actual_duration": 4.0267,
+            "compute_time_sec": 3.7484
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3040604,
-            "data_ready_time": 2.8035,
-            "actual_ast": 4.7091,
-            "actual_aft": 7.2326,
-            "actual_duration": 2.5236,
-            "compute_time_sec": 2.5059
+            "iterations": 4491825,
+            "data_ready_time": 2.6198,
+            "actual_ast": 4.6046,
+            "actual_aft": 7.0086,
+            "actual_duration": 2.404,
+            "compute_time_sec": 2.3985
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 8.3653,
-            "actual_ast": 8.3653,
-            "actual_aft": 10.1249,
-            "actual_duration": 1.7596,
-            "compute_time_sec": 1.4937
+            "iterations": 5308521,
+            "data_ready_time": 8.2711,
+            "actual_ast": 8.2712,
+            "actual_aft": 9.7105,
+            "actual_duration": 1.4393,
+            "compute_time_sec": 1.164
           },
           "T8": {
             "task_id": "T8",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 8.2922,
-            "actual_ast": 8.2922,
-            "actual_aft": 12.8306,
-            "actual_duration": 4.5384,
-            "compute_time_sec": 4.2621
+            "iterations": 3675130,
+            "data_ready_time": 8.0661,
+            "actual_ast": 8.0661,
+            "actual_aft": 13.1201,
+            "actual_duration": 5.054,
+            "compute_time_sec": 4.786
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 13.5915,
-            "actual_ast": 13.5915,
-            "actual_aft": 14.9586,
-            "actual_duration": 1.3671,
-            "compute_time_sec": 1.0948
+            "iterations": 2041739,
+            "data_ready_time": 13.8778,
+            "actual_ast": 13.8778,
+            "actual_aft": 15.7505,
+            "actual_duration": 1.8727,
+            "compute_time_sec": 1.6197
           }
         },
         "transfers": [
@@ -2409,10 +2409,10 @@
             "link": "intra-host",
             "payload_kb": 900,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.014,
-            "injected_latency_sec": 0.886,
-            "send_start": 1.69,
-            "arrival": 2.625
+            "real_transfer_sec": 0.0071,
+            "injected_latency_sec": 0.8929,
+            "send_start": 1.5355,
+            "arrival": 2.4495
           },
           {
             "edge": "T1->T3",
@@ -2421,10 +2421,10 @@
             "link": "inter-host",
             "payload_kb": 600,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.0941,
-            "injected_latency_sec": 0.8059,
-            "send_start": 1.6916,
-            "arrival": 2.8768
+            "real_transfer_sec": 0.1435,
+            "injected_latency_sec": 0.7565,
+            "send_start": 1.536,
+            "arrival": 2.7369
           },
           {
             "edge": "T1->T4",
@@ -2433,10 +2433,10 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0737,
-            "injected_latency_sec": 0.6763,
-            "send_start": 1.6932,
-            "arrival": 2.7283
+            "real_transfer_sec": 0.1347,
+            "injected_latency_sec": 0.6153,
+            "send_start": 1.5365,
+            "arrival": 2.5874
           },
           {
             "edge": "T1->T6",
@@ -2445,10 +2445,10 @@
             "link": "intra-host",
             "payload_kb": 800,
             "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.1152,
-            "injected_latency_sec": 0.6848,
-            "send_start": 1.6963,
-            "arrival": 2.8035
+            "real_transfer_sec": 0.1008,
+            "injected_latency_sec": 0.6992,
+            "send_start": 1.5371,
+            "arrival": 2.6198
           },
           {
             "edge": "T2->T8",
@@ -2457,10 +2457,10 @@
             "link": "inter-host",
             "payload_kb": 900,
             "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.4047,
-            "injected_latency_sec": 0.9453,
-            "send_start": 4.7111,
-            "arrival": 6.4015
+            "real_transfer_sec": 0.5019,
+            "injected_latency_sec": 0.8481,
+            "send_start": 4.6052,
+            "arrival": 6.3083
           },
           {
             "edge": "T2->T9",
@@ -2469,10 +2469,10 @@
             "link": "intra-host",
             "payload_kb": 800,
             "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.3529,
-            "injected_latency_sec": 0.4471,
-            "send_start": 4.713,
-            "arrival": 5.8953
+            "real_transfer_sec": 0.3756,
+            "injected_latency_sec": 0.4244,
+            "send_start": 4.6057,
+            "arrival": 5.8407
           },
           {
             "edge": "T7->T10",
@@ -2481,10 +2481,10 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.0341,
-            "injected_latency_sec": 1.1659,
-            "send_start": 4.9252,
-            "arrival": 6.1344
+            "real_transfer_sec": 0.0966,
+            "injected_latency_sec": 1.1034,
+            "send_start": 4.7378,
+            "arrival": 5.9431
           },
           {
             "edge": "T4->T9",
@@ -2493,10 +2493,10 @@
             "link": "inter-host",
             "payload_kb": 1100,
             "model_comm_sec": 1.65,
-            "real_transfer_sec": 0.0833,
-            "injected_latency_sec": 1.5667,
-            "send_start": 6.7037,
-            "arrival": 8.3653
+            "real_transfer_sec": 0.0629,
+            "injected_latency_sec": 1.5871,
+            "send_start": 6.6142,
+            "arrival": 8.2711
           },
           {
             "edge": "T6->T8",
@@ -2505,10 +2505,10 @@
             "link": "inter-host",
             "payload_kb": 700,
             "model_comm_sec": 1.05,
-            "real_transfer_sec": 0.0211,
-            "injected_latency_sec": 1.0289,
-            "send_start": 7.2328,
-            "arrival": 8.2922
+            "real_transfer_sec": 0.0069,
+            "injected_latency_sec": 1.0431,
+            "send_start": 7.0086,
+            "arrival": 8.0661
           },
           {
             "edge": "T9->T10",
@@ -2517,10 +2517,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0105,
-            "injected_latency_sec": 0.5895,
-            "send_start": 10.125,
-            "arrival": 10.7335
+            "real_transfer_sec": 0.0096,
+            "injected_latency_sec": 0.5904,
+            "send_start": 9.7105,
+            "arrival": 10.3167
           },
           {
             "edge": "T8->T10",
@@ -2529,19 +2529,19 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0111,
-            "injected_latency_sec": 0.7389,
-            "send_start": 12.8307,
-            "arrival": 13.5915
+            "real_transfer_sec": 0.0116,
+            "injected_latency_sec": 0.7384,
+            "send_start": 13.1202,
+            "arrival": 13.8778
           }
         ],
-        "actual_makespan": 14.9586
+        "actual_makespan": 15.7505
       }
     },
     {
       "run": 5,
-      "heft_makespan": 7.5705,
-      "rr_makespan": 15.5353,
+      "heft_makespan": 7.306,
+      "rr_makespan": 16.1918,
       "heft_actual": {
         "algorithm": "HEFT",
         "actual_results": {
@@ -2550,120 +2550,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
             "actual_ast": 0.0001,
-            "actual_aft": 1.5023,
-            "actual_duration": 1.5021,
-            "compute_time_sec": 1.2397
+            "actual_aft": 1.4596,
+            "actual_duration": 1.4594,
+            "compute_time_sec": 1.1871
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2487766,
-            "data_ready_time": 1.5023,
-            "actual_ast": 1.5059,
-            "actual_aft": 2.8161,
-            "actual_duration": 1.3101,
-            "compute_time_sec": 1.0311
+            "iterations": 3675130,
+            "data_ready_time": 1.4596,
+            "actual_ast": 1.4606,
+            "actual_aft": 2.6961,
+            "actual_duration": 1.2355,
+            "compute_time_sec": 0.9647
           },
           "T2": {
             "task_id": "T2",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 1.5023,
-            "actual_ast": 2.8162,
-            "actual_aft": 3.6704,
-            "actual_duration": 0.8542,
-            "compute_time_sec": 0.8441
+            "iterations": 4083478,
+            "data_ready_time": 1.4596,
+            "actual_ast": 2.6961,
+            "actual_aft": 3.6088,
+            "actual_duration": 0.9127,
+            "compute_time_sec": 0.9086
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 2.2303,
-            "actual_ast": 2.2304,
-            "actual_aft": 3.7392,
-            "actual_duration": 1.5088,
-            "compute_time_sec": 1.2406
+            "iterations": 2858434,
+            "data_ready_time": 2.1824,
+            "actual_ast": 2.1824,
+            "actual_aft": 3.6494,
+            "actual_duration": 1.467,
+            "compute_time_sec": 1.2092
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 2211348,
-            "data_ready_time": 1.5023,
-            "actual_ast": 3.6705,
-            "actual_aft": 4.3302,
-            "actual_duration": 0.6597,
-            "compute_time_sec": 0.6489
+            "iterations": 3266782,
+            "data_ready_time": 1.4596,
+            "actual_ast": 3.6088,
+            "actual_aft": 4.3004,
+            "actual_duration": 0.6915,
+            "compute_time_sec": 0.6821
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 3040604,
-            "data_ready_time": 3.0023,
-            "actual_ast": 3.0024,
-            "actual_aft": 4.4595,
-            "actual_duration": 1.4572,
-            "compute_time_sec": 1.1852
+            "iterations": 4491825,
+            "data_ready_time": 2.9341,
+            "actual_ast": 2.9342,
+            "actual_aft": 4.4656,
+            "actual_duration": 1.5315,
+            "compute_time_sec": 1.2695
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 4.3479,
-            "actual_ast": 4.348,
-            "actual_aft": 5.5928,
-            "actual_duration": 1.2448,
-            "compute_time_sec": 1.2377
+            "iterations": 5308521,
+            "data_ready_time": 4.2544,
+            "actual_ast": 4.3004,
+            "actual_aft": 5.4326,
+            "actual_duration": 1.1321,
+            "compute_time_sec": 1.129
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1658511,
-            "data_ready_time": 4.3302,
-            "actual_ast": 5.5929,
-            "actual_aft": 6.1249,
-            "actual_duration": 0.532,
-            "compute_time_sec": 0.5248
+            "iterations": 2450086,
+            "data_ready_time": 4.3004,
+            "actual_ast": 5.4326,
+            "actual_aft": 5.9567,
+            "actual_duration": 0.5241,
+            "compute_time_sec": 0.5209
           },
           "T8": {
             "task_id": "T8",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 5.0564,
-            "actual_ast": 5.0565,
-            "actual_aft": 6.1994,
-            "actual_duration": 1.143,
-            "compute_time_sec": 1.1365
+            "iterations": 3675130,
+            "data_ready_time": 4.9771,
+            "actual_ast": 4.9771,
+            "actual_aft": 6.0157,
+            "actual_duration": 1.0386,
+            "compute_time_sec": 1.0356
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 6.9599,
-            "actual_ast": 6.9599,
-            "actual_aft": 7.5705,
-            "actual_duration": 0.6106,
-            "compute_time_sec": 0.6034
+            "iterations": 2041739,
+            "data_ready_time": 6.771,
+            "actual_ast": 6.7711,
+            "actual_aft": 7.306,
+            "actual_duration": 0.5349,
+            "compute_time_sec": 0.5302
           }
         },
         "transfers": [
@@ -2674,10 +2674,10 @@
             "link": "intra-host",
             "payload_kb": 700,
             "model_comm_sec": 0.7,
-            "real_transfer_sec": 0.0082,
-            "injected_latency_sec": 0.6918,
-            "send_start": 1.5024,
-            "arrival": 2.2303
+            "real_transfer_sec": 0.0062,
+            "injected_latency_sec": 0.6938,
+            "send_start": 1.4596,
+            "arrival": 2.1824
           },
           {
             "edge": "T1->T6",
@@ -2686,10 +2686,10 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.0705,
-            "injected_latency_sec": 1.1295,
-            "send_start": 1.5042,
-            "arrival": 3.0023
+            "real_transfer_sec": 0.1006,
+            "injected_latency_sec": 1.0994,
+            "send_start": 1.4601,
+            "arrival": 2.9341
           },
           {
             "edge": "T4->T8",
@@ -2698,10 +2698,10 @@
             "link": "inter-host",
             "payload_kb": 1300,
             "model_comm_sec": 1.95,
-            "real_transfer_sec": 0.0699,
-            "injected_latency_sec": 1.8801,
-            "send_start": 2.818,
-            "arrival": 4.7906
+            "real_transfer_sec": 0.1191,
+            "injected_latency_sec": 1.8309,
+            "send_start": 2.6968,
+            "arrival": 4.6663
           },
           {
             "edge": "T2->T8",
@@ -2710,10 +2710,10 @@
             "link": "inter-host",
             "payload_kb": 900,
             "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.15,
-            "injected_latency_sec": 1.2,
-            "send_start": 3.6723,
-            "arrival": 5.0564
+            "real_transfer_sec": 0.1257,
+            "injected_latency_sec": 1.2243,
+            "send_start": 3.6094,
+            "arrival": 4.9771
           },
           {
             "edge": "T5->T9",
@@ -2722,10 +2722,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0517,
-            "injected_latency_sec": 0.5483,
-            "send_start": 3.7393,
-            "arrival": 4.3479
+            "real_transfer_sec": 0.0436,
+            "injected_latency_sec": 0.5564,
+            "send_start": 3.6495,
+            "arrival": 4.2544
           },
           {
             "edge": "T8->T10",
@@ -2734,13 +2734,13 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0083,
-            "injected_latency_sec": 0.7417,
-            "send_start": 6.1995,
-            "arrival": 6.9599
+            "real_transfer_sec": 0.0066,
+            "injected_latency_sec": 0.7434,
+            "send_start": 6.0157,
+            "arrival": 6.771
           }
         ],
-        "actual_makespan": 7.5705
+        "actual_makespan": 7.306
       },
       "rr_actual": {
         "algorithm": "Round-Robin",
@@ -2750,120 +2750,120 @@
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3317022,
+            "iterations": 4900173,
             "data_ready_time": 0.0,
-            "actual_ast": 0.0002,
-            "actual_aft": 1.4665,
-            "actual_duration": 1.4664,
-            "compute_time_sec": 1.1949
+            "actual_ast": 0.0001,
+            "actual_aft": 1.3142,
+            "actual_duration": 1.3141,
+            "compute_time_sec": 1.0467
           },
           "T5": {
             "task_id": "T5",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1934929,
-            "data_ready_time": 1.4665,
-            "actual_ast": 1.4752,
-            "actual_aft": 2.6567,
-            "actual_duration": 1.1815,
-            "compute_time_sec": 0.8813
+            "iterations": 2858434,
+            "data_ready_time": 1.3142,
+            "actual_ast": 1.3164,
+            "actual_aft": 2.3186,
+            "actual_duration": 1.0022,
+            "compute_time_sec": 0.7219
           },
           "T3": {
             "task_id": "T3",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2211348,
-            "data_ready_time": 2.6643,
-            "actual_ast": 2.6644,
-            "actual_aft": 3.9104,
-            "actual_duration": 1.246,
-            "compute_time_sec": 0.9762
-          },
-          "T2": {
-            "task_id": "T2",
-            "vm_id": "vm-worker-2",
-            "host_id": "host-1",
-            "node_name": "heft-datacenter-worker",
-            "iterations": 2764185,
-            "data_ready_time": 2.4032,
-            "actual_ast": 2.4032,
-            "actual_aft": 4.5479,
-            "actual_duration": 2.1447,
-            "compute_time_sec": 1.8834
+            "iterations": 3266782,
+            "data_ready_time": 2.4836,
+            "actual_ast": 2.4837,
+            "actual_aft": 3.946,
+            "actual_duration": 1.4623,
+            "compute_time_sec": 1.1991
           },
           "T7": {
             "task_id": "T7",
             "vm_id": "vm-worker-3",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 1658511,
-            "data_ready_time": 3.9104,
-            "actual_ast": 3.9107,
-            "actual_aft": 4.7184,
-            "actual_duration": 0.8078,
-            "compute_time_sec": 0.801
+            "iterations": 2450086,
+            "data_ready_time": 3.946,
+            "actual_ast": 3.9461,
+            "actual_aft": 4.6742,
+            "actual_duration": 0.7282,
+            "compute_time_sec": 0.7251
+          },
+          "T2": {
+            "task_id": "T2",
+            "vm_id": "vm-worker-2",
+            "host_id": "host-1",
+            "node_name": "heft-datacenter-worker",
+            "iterations": 4083478,
+            "data_ready_time": 2.2331,
+            "actual_ast": 2.2331,
+            "actual_aft": 4.6759,
+            "actual_duration": 2.4428,
+            "compute_time_sec": 2.1858
           },
           "T4": {
             "task_id": "T4",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 2.5475,
-            "actual_ast": 2.5476,
-            "actual_aft": 6.5772,
-            "actual_duration": 4.0296,
-            "compute_time_sec": 3.7492
+            "iterations": 3675130,
+            "data_ready_time": 2.3405,
+            "actual_ast": 2.3405,
+            "actual_aft": 7.1873,
+            "actual_duration": 4.8468,
+            "compute_time_sec": 4.5813
           },
           "T6": {
             "task_id": "T6",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3040604,
-            "data_ready_time": 2.6419,
-            "actual_ast": 4.548,
-            "actual_aft": 7.1078,
-            "actual_duration": 2.5598,
-            "compute_time_sec": 2.5436
+            "iterations": 4491825,
+            "data_ready_time": 2.4105,
+            "actual_ast": 4.676,
+            "actual_aft": 8.1674,
+            "actual_duration": 3.4914,
+            "compute_time_sec": 3.4829
           },
           "T9": {
             "task_id": "T9",
             "vm_id": "vm-worker-1",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 3593441,
-            "data_ready_time": 8.2398,
-            "actual_ast": 8.2399,
-            "actual_aft": 9.8836,
-            "actual_duration": 1.6437,
-            "compute_time_sec": 1.3765
+            "iterations": 5308521,
+            "data_ready_time": 8.8451,
+            "actual_ast": 8.8451,
+            "actual_aft": 10.2585,
+            "actual_duration": 1.4133,
+            "compute_time_sec": 1.1485
           },
           "T8": {
             "task_id": "T8",
             "vm_id": "vm-worker-4",
             "host_id": "host-2",
             "node_name": "heft-datacenter-worker2",
-            "iterations": 2487766,
-            "data_ready_time": 8.1718,
-            "actual_ast": 8.1719,
-            "actual_aft": 13.0637,
-            "actual_duration": 4.8918,
-            "compute_time_sec": 4.614
+            "iterations": 3675130,
+            "data_ready_time": 9.2255,
+            "actual_ast": 9.2255,
+            "actual_aft": 14.0715,
+            "actual_duration": 4.8459,
+            "compute_time_sec": 4.8407
           },
           "T10": {
             "task_id": "T10",
             "vm_id": "vm-worker-2",
             "host_id": "host-1",
             "node_name": "heft-datacenter-worker",
-            "iterations": 1382092,
-            "data_ready_time": 13.8247,
-            "actual_ast": 13.8247,
-            "actual_aft": 15.5353,
-            "actual_duration": 1.7106,
-            "compute_time_sec": 1.4391
+            "iterations": 2041739,
+            "data_ready_time": 14.8281,
+            "actual_ast": 14.8281,
+            "actual_aft": 16.1918,
+            "actual_duration": 1.3637,
+            "compute_time_sec": 1.1035
           }
         },
         "transfers": [
@@ -2874,10 +2874,10 @@
             "link": "intra-host",
             "payload_kb": 900,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.011,
-            "injected_latency_sec": 0.889,
-            "send_start": 1.4666,
-            "arrival": 2.4032
+            "real_transfer_sec": 0.0071,
+            "injected_latency_sec": 0.8929,
+            "send_start": 1.3143,
+            "arrival": 2.2331
           },
           {
             "edge": "T1->T3",
@@ -2886,10 +2886,10 @@
             "link": "inter-host",
             "payload_kb": 600,
             "model_comm_sec": 0.9,
-            "real_transfer_sec": 0.2689,
-            "injected_latency_sec": 0.6311,
-            "send_start": 1.4684,
-            "arrival": 2.6643
+            "real_transfer_sec": 0.2161,
+            "injected_latency_sec": 0.6839,
+            "send_start": 1.3148,
+            "arrival": 2.4836
           },
           {
             "edge": "T1->T4",
@@ -2898,10 +2898,10 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.2579,
-            "injected_latency_sec": 0.4921,
-            "send_start": 1.4719,
-            "arrival": 2.5475
+            "real_transfer_sec": 0.2238,
+            "injected_latency_sec": 0.5262,
+            "send_start": 1.3154,
+            "arrival": 2.3405
           },
           {
             "edge": "T1->T6",
@@ -2910,34 +2910,10 @@
             "link": "intra-host",
             "payload_kb": 800,
             "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.2405,
-            "injected_latency_sec": 0.5595,
-            "send_start": 1.4735,
-            "arrival": 2.6419
-          },
-          {
-            "edge": "T2->T8",
-            "src_vm": "vm-worker-2",
-            "dst_vm": "vm-worker-4",
-            "link": "inter-host",
-            "payload_kb": 900,
-            "model_comm_sec": 1.35,
-            "real_transfer_sec": 0.4581,
-            "injected_latency_sec": 0.8919,
-            "send_start": 4.5499,
-            "arrival": 6.2681
-          },
-          {
-            "edge": "T2->T9",
-            "src_vm": "vm-worker-2",
-            "dst_vm": "vm-worker-1",
-            "link": "intra-host",
-            "payload_kb": 800,
-            "model_comm_sec": 0.8,
-            "real_transfer_sec": 0.1799,
-            "injected_latency_sec": 0.6201,
-            "send_start": 4.5516,
-            "arrival": 5.8439
+            "real_transfer_sec": 0.2207,
+            "injected_latency_sec": 0.5793,
+            "send_start": 1.3159,
+            "arrival": 2.4105
           },
           {
             "edge": "T7->T10",
@@ -2946,10 +2922,34 @@
             "link": "inter-host",
             "payload_kb": 800,
             "model_comm_sec": 1.2,
-            "real_transfer_sec": 0.1169,
-            "injected_latency_sec": 1.0831,
-            "send_start": 4.7185,
-            "arrival": 5.9288
+            "real_transfer_sec": 0.0859,
+            "injected_latency_sec": 1.1141,
+            "send_start": 4.6743,
+            "arrival": 5.8833
+          },
+          {
+            "edge": "T2->T8",
+            "src_vm": "vm-worker-2",
+            "dst_vm": "vm-worker-4",
+            "link": "inter-host",
+            "payload_kb": 900,
+            "model_comm_sec": 1.35,
+            "real_transfer_sec": 0.5114,
+            "injected_latency_sec": 0.8386,
+            "send_start": 4.677,
+            "arrival": 6.3665
+          },
+          {
+            "edge": "T2->T9",
+            "src_vm": "vm-worker-2",
+            "dst_vm": "vm-worker-1",
+            "link": "intra-host",
+            "payload_kb": 800,
+            "model_comm_sec": 0.8,
+            "real_transfer_sec": 0.3374,
+            "injected_latency_sec": 0.4626,
+            "send_start": 4.6778,
+            "arrival": 5.8782
           },
           {
             "edge": "T4->T9",
@@ -2958,10 +2958,10 @@
             "link": "inter-host",
             "payload_kb": 1100,
             "model_comm_sec": 1.65,
-            "real_transfer_sec": 0.0849,
-            "injected_latency_sec": 1.5651,
-            "send_start": 6.5773,
-            "arrival": 8.2398
+            "real_transfer_sec": 0.082,
+            "injected_latency_sec": 1.568,
+            "send_start": 7.1874,
+            "arrival": 8.8451
           },
           {
             "edge": "T6->T8",
@@ -2970,10 +2970,10 @@
             "link": "inter-host",
             "payload_kb": 700,
             "model_comm_sec": 1.05,
-            "real_transfer_sec": 0.0364,
-            "injected_latency_sec": 1.0136,
-            "send_start": 7.1079,
-            "arrival": 8.1718
+            "real_transfer_sec": 0.0112,
+            "injected_latency_sec": 1.0388,
+            "send_start": 8.1675,
+            "arrival": 9.2255
           },
           {
             "edge": "T9->T10",
@@ -2982,10 +2982,10 @@
             "link": "intra-host",
             "payload_kb": 600,
             "model_comm_sec": 0.6,
-            "real_transfer_sec": 0.0098,
-            "injected_latency_sec": 0.5902,
-            "send_start": 9.8837,
-            "arrival": 10.4926
+            "real_transfer_sec": 0.0061,
+            "injected_latency_sec": 0.5939,
+            "send_start": 10.2585,
+            "arrival": 10.8642
           },
           {
             "edge": "T8->T10",
@@ -2994,15 +2994,15 @@
             "link": "inter-host",
             "payload_kb": 500,
             "model_comm_sec": 0.75,
-            "real_transfer_sec": 0.0848,
-            "injected_latency_sec": 0.6652,
-            "send_start": 13.0638,
-            "arrival": 13.8247
+            "real_transfer_sec": 0.0619,
+            "injected_latency_sec": 0.6881,
+            "send_start": 14.0715,
+            "arrival": 14.8281
           }
         ],
-        "actual_makespan": 15.5353
+        "actual_makespan": 16.1918
       }
     }
   ],
-  "representative_run": 1
+  "representative_run": 5
 }

@@ -42,17 +42,34 @@
 
 ## 1. Ringkasan Eksekutif & Hasil Eksperimen
 
-Penjadwalan sekumpulan tugas yang saling bergantung (*Directed Acyclic Graph* / DAG) ke prosesor heterogen adalah masalah **NP-complete**. Proyek ini membuktikan keunggulan heuristik **Heterogeneous Earliest Finish Time (HEFT)** secara riil di atas klaster Kubernetes heterogen (1 Datacenter, 2 Host, 4 VM) yang menjalankan beban kerja komputasi nyata (*CPU-bound SHA-256 hashing*) serta transfer payload data antar-VM melalui HTTP.
+Penjadwalan sekumpulan tugas yang saling bergantung (*Directed Acyclic Graph* / DAG) ke prosesor heterogen adalah masalah **NP-complete**. Proyek ini merealisasikan **Studi Komparasi Tiga Dimensi** yang mengkaji algoritma heuristik **Heterogeneous Earliest Finish Time (HEFT)** terhadap algoritma baseline **Topological Round-Robin (RR)** pada:
+1. **Model Matematis Teoritis:** Kalkulasi analitis formulasi Topcuoglu et al. (IEEE TPDS 2002).
+2. **Simulator CloudSim 7.0.1:** Simulasi discrete-event deterministik ideal tanpa delay sistem operasi.
+3. **Real-World Kubernetes (Kind):** Klaster komputasi awan nyata dengan pembatasan cgroups CFS Quota dan HTTP network transfer data riil (5 kali pengujian berulang).
 
-### Tabel Perbandingan Metrik Utama (5 Kali Pengujian Berulang)
-| Skema Penjadwalan | Makespan ($C_{\max}$) | Schedule Length Ratio (SLR) | Speedup | Konsistensi |
-| :--- | :---: | :---: | :---: | :---: |
-| **HEFT (Teoritis)** | `6.900` s | `1.725` | `1.304x` | Model Matematika |
-| **Round-Robin (Teoritis)** | `12.700` s | `3.175` | `0.709x` | Model Matematika |
-| **HEFT (Aktual Cloud)** | **`7.367 ± 0.314` s** | **`1.842 ± 0.079`** | **`1.224 ± 0.054x`** | **Menang 5 dari 5 run (100%)** |
-| **Round-Robin (Aktual Cloud)** | `13.437 ± 0.529` s | `3.359 ± 0.132` | `0.671 ± 0.026x` | Kalah di semua run |
+📄 **Laporan Akademis Lengkap:** [`LAPORAN_AKHIR_SOKA_KELOMPOK_6.md`](LAPORAN_AKHIR_SOKA_KELOMPOK_6.md)  
+📋 **PRD & Rencana Implementasi:** [`PRD_REVISI_SOKA_KEL_6.md`](PRD_REVISI_SOKA_KEL_6.md)
 
-> 🚀 **Pencapaian:** Algoritma HEFT menghasilkan **reduksi waktu eksekusi (makespan) sebesar 45.18%** dibandingkan Round-Robin secara konsisten pada eksekusi nyata di Kubernetes.
+### Tabel Utama Komparasi Tiga Dimensi (Tri-Dimensional Benchmark)
+| Metrik Kinerja | Algoritma | 1. Matematis Teoritis | 2. Simulator (CloudSim 7.0.1) | 3. Real Cloud (Kubernetes Mean ± Std) | Diferensiasi Real vs Sim (Δ%) |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| **Makespan ($C_{\max}$)** | **HEFT** | 6.900 s | 6.900 s | **7.349 ± 0.314 s** | **+6.51%** |
+| | **Round-Robin** | 12.700 s | 12.700 s | **16.020 ± 0.234 s** | **+26.14%** |
+| **Schedule Length Ratio ($SLR$)** | **HEFT** | 1.725 | 1.725 | **1.837 ± 0.079** | **+6.51%** |
+| | **Round-Robin** | 3.175 | 3.175 | **4.005 ± 0.059** | **+26.14%** |
+| **Speedup ($S$)** | **HEFT** | 1.304x | 1.304x | **1.226 ± 0.052x** | **-5.95%** |
+| | **Round-Robin** | 0.709x | 0.709x | **0.562 ± 0.008x** | **-20.75%** |
+| **Parallel Efficiency ($\eta$)** | **HEFT** | 32.61% | 32.61% | **30.66 ± 1.30%** | **-5.97%** |
+| | **Round-Robin** | 17.72% | 17.72% | **14.05 ± 0.21%** | **-20.72%** |
+| **Rata-rata Utilisasi CPU ($U_{avg}$)** | **HEFT** | 37.57% | 37.57% | **35.33 ± 1.49%** | **-5.97%** |
+| | **Round-Robin** | 34.39% | 34.39% | **27.27 ± 0.40%** | **-20.72%** |
+| **Communication Overhead ($O_{comm}$)** | **HEFT** | 7.15 s | 7.15 s | **6.55 s** | **-8.39%** |
+| | **Round-Robin** | 10.55 s | 10.55 s | **10.75 s** | **+1.90%** |
+| **Reduksi Makespan HEFT vs RR** | **Efisiensi HEFT** | **45.67%** | **45.67%** | **54.12%** | **HEFT Unggul Konsisten** |
+
+> 🚀 **Kesimpulan Kinerja:**
+> 1. **Superioritas HEFT:** HEFT berhasil memangkas makespan hingga **54.12%** di Kubernetes nyata dibandingkan baseline Round-Robin.
+> 2. **Diferensiasi Fisik:** Makespan HEFT di dunia nyata mengalami peningkatan **+6.51%** dibanding simulator CloudSim akibat variabilitas sistem operasi (*CFS quota throttling jitter*, *Linux veth socket delay*, dan *TCP handshakes*). Nilai gap ini wajar dan membuktikan reliabilitas model eksperimen.
 
 ---
 
@@ -223,24 +240,36 @@ Dataset graf tugas diadopsi dari paper Topcuoglu et al. (2002) (10 node, 15 edge
 
 ---
 
-## 5. Visualisasi Hasil Pengujian
+## 5. Visualisasi Hasil Pengujian & Analisis Gap
 
-### 1. Gantt Chart Perbandingan 3 Panel
-Gantt Chart di bawah menyandingkan **HEFT Teoritis**, **HEFT Riil di Kubernetes**, dan **Round-Robin Riil di Kubernetes**, lengkap dengan visualisasi transfer payload data:
+### 1. Perbandingan Kinerja Tiga Dimensi (Teori vs CloudSim vs Kubernetes)
+Grafik 4-panel di bawah menyandingkan metrik Makespan, Schedule Length Ratio (SLR), Speedup, serta Efisiensi Paralel dan Utilisasi CPU di ketiga dimensi:
+
+![Three-Dimensional Comparison](kube-heft-scheduler/results/three_dimensional_comparison.png)
+
+### 2. Analisis Selisih Diferensiasi (Gap Analysis) & Keunggulan HEFT
+Grafik di bawah menganalisis persentase deviasi fisik antara real-world Kubernetes terhadap CloudSim ideal, serta perbandingan reduksi makespan HEFT terhadap Round-Robin:
+
+![Differentiation Gap Analysis](kube-heft-scheduler/results/differentiation_gap_analysis.png)
+
+### 3. Gantt Chart Perbandingan 3 Panel
+Gantt Chart di bawah menyandingkan **HEFT Teoritis**, **HEFT Riil di Kubernetes**, dan **Round-Robin Riil di Kubernetes**, lengkap dengan visualisasi transfer payload data antar-VM:
 
 ![Gantt Comparison](kube-heft-scheduler/results/gantt_comparison.png)
 
-### 2. Grafik Makespan Per Run (5 Pengujian)
-Memperlihatkan stabilitas performa HEFT yang selalu mengungguli Round-Robin di setiap run:
+### 4. Grafik Makespan Per Run (5 Pengujian Berulang)
+Memperlihatkan stabilitas performa HEFT yang konsisten unggul atas Round-Robin pada setiap run eksperimen nyata:
 
 ![Makespan Runs](kube-heft-scheduler/results/makespan_runs.png)
 
-### Mengapa HEFT Menang Telak atas Round-Robin?
+### Mengapa HEFT Menang Telak atas Round-Robin di Semua Dimensi?
 1. **Pencegahan Bottleneck di VM Lambat:**  
-   Round-Robin menempatkan `T4` dan `T8` di `vm-worker-4` (`250m` CPU), yang membutuhkan waktu masing-masing **4.07 s** dan **3.11 s**. Ini menahan penyelesaian `T9` dan `T10`.  
-   Sebaliknya, **HEFT sama sekali tidak menggunakan `vm-worker-4`**, karena HEFT menghitung bahwa penalti komputasi di VM4 jauh lebih buruk daripada mengantre di VM1 atau VM3.
-2. **Optimalisasi Jalur Kritis:**  
-   HEFT menempatkan seluruh tugas di jalur kritis (`T1`, `T2`, `T9`, `T10`) pada `vm-worker-1` (prosesor tercepat), sehingga komunikasi bernilai **nol** dan komputasi berlangsung pada kecepatan maksimal.
+   Round-Robin menempatkan `T4` dan `T8` di `vm-worker-4` (`250m` CPU), yang membutuhkan waktu masing-masing **~4.07 s** dan **~3.11 s**. Ini menahan penyelesaian alur kerja berikutnya (`T9` dan `T10`).  
+   Sebaliknya, **HEFT sama sekali tidak menggunakan `vm-worker-4`**, karena HEFT menghitung bahwa penalti komputasi di VM4 jauh lebih buruk daripada mengantre di prosesor cepat (`vm-worker-1` atau `vm-worker-3`).
+2. **Optimalisasi Jalur Kritis (Zero Communication Cost):**  
+   HEFT menempatkan seluruh tugas di jalur kritis minimum (`T1`, `T2`, `T9`, `T10` dengan $CP_{\min} = 4.00\text{ s}$) pada `vm-worker-1` (prosesor tercepat), sehingga biaya komunikasi data jaringan bernilai **nol** dan komputasi berlangsung pada throughput maksimal.
+3. **Penyebab Diferensiasi Fisik (+6.51% Gap):**  
+   Simulator CloudSim tidak memiliki latency context-switching kernel Linux atau delay soket TCP veth pair. Pada Kubernetes nyata, batas kuota CPU cgroups dievaluasi setiap periode 100ms yang menimbulkan sedikit throttling jitter dan HTTP networking serialization delay.
 
 ---
 
