@@ -48,7 +48,8 @@ Penjadwalan sekumpulan tugas yang saling bergantung (*Directed Acyclic Graph* / 
 3. **Real-World Kubernetes (Kind):** Klaster komputasi awan nyata dengan pembatasan cgroups CFS Quota dan HTTP network transfer data riil (5 kali pengujian berulang).
 
 📄 **Laporan Akademis Lengkap:** [`LAPORAN_AKHIR_SOKA_KELOMPOK_6.md`](LAPORAN_AKHIR_SOKA_KELOMPOK_6.md)  
-📋 **PRD & Rencana Implementasi:** [`PRD_REVISI_SOKA_KEL_6.md`](PRD_REVISI_SOKA_KEL_6.md)
+📋 **PRD & Rencana Implementasi:** [`PRD_REVISI_SOKA_KEL_6.md`](PRD_REVISI_SOKA_KEL_6.md)  
+🔬 **Komparasi Nyata CloudSim 7.0.1 vs Teori vs Kubernetes:** [`comparison/README_LAPORAN.md`](comparison/README_LAPORAN.md) (kode eksekusi di [`comparison/`](comparison/))
 
 ### Tabel Utama Komparasi Tiga Dimensi (Tri-Dimensional Benchmark)
 | Metrik Kinerja | Algoritma | 1. Matematis Teoritis | 2. Simulator (CloudSim 7.0.1) | 3. Real Cloud (Kubernetes Mean ± Std) | Diferensiasi Real vs Sim (Δ%) |
@@ -536,9 +537,16 @@ curl -X POST http://localhost:30082/execute -H "Content-Type: application/json" 
 
 ```text
 HEFT-Simulation-Realworld-SOKA-KEL-6/
-├── .gitignore                                                  # Filter file commit (.venv, cache)
+├── .gitignore                                                  # Filter file commit (.venv, cache, cloudsim/bin)
 ├── README.md                                                   # Dokumentasi utama repositori ini
 ├── Implementasi Real-World Algoritma HEFT... .md               # Dokumen spesifikasi PRD v2.0
+├── comparison/                                                 # Modul komparasi nyata Teori vs CloudSim 7.0.1 vs Kubernetes
+│   ├── README.md                                               # Panduan menjalankan komparasi
+│   ├── README_LAPORAN.md                                       # Laporan komparasi lengkap beserta analisis gap & visualisasi
+│   ├── compare_heft.py                                         # Evaluator & generator grafik 3 dimensi
+│   ├── run_comparison.ps1                                      # Skrip eksekusi sekali jalan (CloudSim + Python)
+│   ├── cloudsim/src/                                           # Runner Java CloudSim 7.0.1 (dag10-flat, dag10-topo, dag10-rr, synthetic-100)
+│   └── results/                                                # Output JSON, laporan, dan grafik komparasi
 └── kube-heft-scheduler/
     ├── PRD.md                                                  # Salinan PRD pada root proyek
     ├── README.md                                               # Panduan ringkas scheduler

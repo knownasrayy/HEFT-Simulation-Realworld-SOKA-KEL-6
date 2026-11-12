@@ -1,0 +1,29 @@
+{
+  "mode": "dag10-flat",
+  "algorithm": "HEFT",
+  "topology_aware": false,
+  "task_count": 10,
+  "edge_count": 15,
+  "vm_count": 4,
+  "completed_tasks": 10,
+  "avg_comm_multiplier": 0.750000,
+  "estimated_makespan": 6.766667,
+  "actual_makespan": 8.176000,
+  "comm_overhead_sec": 6.200000,
+  "cpu_utilization_pct": 33.9367,
+  "energy_joule": 1843.3000,
+  "scheduling_runtime_ms": 6.9365,
+  "priority_order": ["T1", "T4", "T2", "T5", "T6", "T3", "T9", "T8", "T7", "T10"],
+  "tasks": [
+    {"id": 0, "label": "T1", "mi": 1200, "rank_u": 10.058333, "vm_id": 0, "vm_label": "vm-worker-1", "host_id": "host-1", "est": 0.000000, "eft": 1.200000, "ast": 0.010000, "aft": 1.210000},
+    {"id": 1, "label": "T2", "mi": 1000, "rank_u": 6.883333, "vm_id": 0, "vm_label": "vm-worker-1", "host_id": "host-1", "est": 2.100000, "eft": 3.100000, "ast": 1.210000, "aft": 2.210000},
+    {"id": 2, "label": "T3", "mi": 800, "rank_u": 5.383333, "vm_id": 1, "vm_label": "vm-worker-2", "host_id": "host-1", "est": 1.800000, "eft": 3.400000, "ast": 1.810000, "aft": 3.409333},
+    {"id": 3, "label": "T4", "mi": 900, "rank_u": 6.900000, "vm_id": 0, "vm_label": "vm-worker-1", "host_id": "host-1", "est": 1.200000, "eft": 2.100000, "ast": 2.210000, "aft": 3.109333},
+    {"id": 4, "label": "T5", "mi": 700, "rank_u": 6.108333, "vm_id": 2, "vm_label": "vm-worker-3", "host_id": "host-2", "est": 1.900000, "eft": 2.833333, "ast": 1.910000, "aft": 2.843333},
+    {"id": 5, "label": "T6", "mi": 1100, "rank_u": 6.108333, "vm_id": 0, "vm_label": "vm-worker-1", "host_id": "host-1", "est": 3.100000, "eft": 4.200000, "ast": 3.109333, "aft": 4.209333},
+    {"id": 6, "label": "T7", "mi": 600, "rank_u": 2.891667, "vm_id": 1, "vm_label": "vm-worker-2", "host_id": "host-1", "est": 3.400000, "eft": 4.600000, "ast": 3.409333, "aft": 4.609333},
+    {"id": 7, "label": "T8", "mi": 900, "rank_u": 3.291667, "vm_id": 2, "vm_label": "vm-worker-3", "host_id": "host-2", "est": 4.900000, "eft": 6.100000, "ast": 5.509333, "aft": 6.709333},
+    {"id": 8, "label": "T9", "mi": 1300, "rank_u": 4.200000, "vm_id": 0, "vm_label": "vm-worker-1", "host_id": "host-1", "est": 4.200000, "eft": 5.500000, "ast": 4.209333, "aft": 5.509333},
+    {"id": 9, "label": "T10", "mi": 500, "rank_u": 1.041667, "vm_id": 2, "vm_label": "vm-worker-3", "host_id": "host-2", "est": 6.100000, "eft": 6.766667, "ast": 7.509333, "aft": 8.176000}
+  ]
+}

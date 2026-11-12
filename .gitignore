@@ -23,3 +23,7 @@ dist/
 *.swp
 .DS_Store
 Thumbs.db
+
+# Java / CloudSim comparison build artifacts
+comparison/cloudsim/bin/
+*.class
